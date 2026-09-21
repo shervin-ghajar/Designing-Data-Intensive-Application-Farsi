@@ -2,7 +2,9 @@
 
 ## Designing Data-Intensive Applications
 
-این branch یک **ترجمهٔ کامل برای مطالعهٔ شخصی** از کتاب مارتین کلپمن است. اصطلاحات فنی مانند `document`، `relational`، `normalization`، `denormalization` و `rebalancing` به شکل اصلی باقی می‌مانند و با توضیح ساده همراه می‌شوند.
+این مخزن ترجمهٔ فارسی کتاب **Designing Data-Intensive Applications** نوشتهٔ **Martin Kleppmann** است. کتاب دربارهٔ طراحی سامانه‌های داده‌محورِ reliable، scalable و maintainable است و موضوعاتی مانند data model، storage، replication، distributed systems، transaction، batch processing و stream processing را بررسی می‌کند.
+
+فصل‌ها با نثر فارسی روان و آموزشی ترجمه شده‌اند. برای حفظ دقت فنی، نام اصطلاحات تخصصی، ابزارها، APIها و روش‌ها در کنار توضیح فارسی آن‌ها به شکل اصلی آورده شده‌اند و مثال‌ها و figureهای مرتبط نیز در هر فصل قرار گرفته‌اند.
 
 ## فهرست مطالب
 
