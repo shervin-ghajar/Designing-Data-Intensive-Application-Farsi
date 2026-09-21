@@ -6,45 +6,49 @@
 
 فصل‌ها با نثر فارسی روان و آموزشی ترجمه شده‌اند. برای حفظ دقت فنی، نام اصطلاحات تخصصی، ابزارها، APIها و روش‌ها در کنار توضیح فارسی آن‌ها به شکل اصلی آورده شده‌اند و مثال‌ها و figureهای مرتبط نیز در هر فصل قرار گرفته‌اند.
 
-## فهرست مطالب
+<h2 dir="rtl" align="right">فهرست مطالب</h2>
 
-### پیشگفتار
+<h3 dir="rtl" align="right">پیشگفتار</h3>
 
-- [پیشگفتار](./preface/README.md)
+<ul dir="rtl" align="right">
+  <li><a href="./preface/README.md">پیشگفتار</a></li>
+</ul>
 
-### Part I: Foundations of Data Systems
+<h3 dir="rtl" align="right">بخش اول: <span dir="ltr">Foundations of Data Systems</span></h3>
 
-| فصل | عنوان                                                                                               | وضعیت           |
-| --- | --------------------------------------------------------------------------------------------------- | --------------- |
-| ۱   | [Reliability, Scalability, Maintainability](./chapters/01-reliable-scalable-maintainable/README.md) | ترجمه شده |
-| ۲   | [Data Models و Query Languages](./chapters/02-data-models-query-languages/README.md)                | ترجمه شده |
-| ۳   | [Storage و Retrieval](./chapters/03-storage-retrieval/README.md)                                    | ترجمه شده |
-| ۴   | [Encoding و Evolution](./chapters/04-encoding-evolution/README.md)                                  | ترجمه شده |
+<ul dir="rtl" align="right">
+  <li><a href="./chapters/01-reliable-scalable-maintainable/README.md">فصل ۱: <span dir="ltr">Reliability, Scalability, Maintainability</span></a></li>
+  <li><a href="./chapters/02-data-models-query-languages/README.md">فصل ۲: <span dir="ltr">Data Models</span> و <span dir="ltr">Query Languages</span></a></li>
+  <li><a href="./chapters/03-storage-retrieval/README.md">فصل ۳: <span dir="ltr">Storage</span> و <span dir="ltr">Retrieval</span></a></li>
+  <li><a href="./chapters/04-encoding-evolution/README.md">فصل ۴: <span dir="ltr">Encoding</span> و <span dir="ltr">Evolution</span></a></li>
+</ul>
 
-### Part II: Distributed Data
+<h3 dir="rtl" align="right">بخش دوم: <span dir="ltr">Distributed Data</span></h3>
 
-| فصل | عنوان                                                                                 | وضعیت           |
-| --- | ------------------------------------------------------------------------------------- | --------------- |
-| ۵   | [Replication](./chapters/05-replication/README.md)                                    | ترجمه شده |
-| ۶   | [Partitioning و Sharding](./chapters/06-partitioning/README.md)                       | ترجمه شده |
-| ۷   | [Transactions و Concurrency](./chapters/07-transactions/README.md)                    | ترجمه شده |
-| ۸   | [Distributed Systems: Failure و Timeout](./chapters/08-distributed-systems/README.md) | ترجمه شده |
-| ۹   | [Consistency و Consensus](./chapters/09-consistency-consensus/README.md)              | ترجمه شده |
+<ul dir="rtl" align="right">
+  <li><a href="./chapters/05-replication/README.md">فصل ۵: <span dir="ltr">Replication</span></a></li>
+  <li><a href="./chapters/06-partitioning/README.md">فصل ۶: <span dir="ltr">Partitioning</span> و <span dir="ltr">Sharding</span></a></li>
+  <li><a href="./chapters/07-transactions/README.md">فصل ۷: <span dir="ltr">Transactions</span> و <span dir="ltr">Concurrency</span></a></li>
+  <li><a href="./chapters/08-distributed-systems/README.md">فصل ۸: <span dir="ltr">Distributed Systems: Failure</span> و <span dir="ltr">Timeout</span></a></li>
+  <li><a href="./chapters/09-consistency-consensus/README.md">فصل ۹: <span dir="ltr">Consistency</span> و <span dir="ltr">Consensus</span></a></li>
+</ul>
 
-### Part III: Derived Data
+<h3 dir="rtl" align="right">بخش سوم: <span dir="ltr">Derived Data</span></h3>
 
-| فصل | عنوان                                                                    | وضعیت           |
-| --- | ------------------------------------------------------------------------ | --------------- |
-| ۱۰  | [Batch Processing](./chapters/10-batch-processing/README.md)             | ترجمه شده |
-| ۱۱  | [Stream Processing](./chapters/11-stream-processing/README.md)           | ترجمه شده |
-| ۱۲  | [Future of Data Systems](./chapters/12-future-of-data-systems/README.md) | ترجمه شده |
+<ul dir="rtl" align="right">
+  <li><a href="./chapters/10-batch-processing/README.md">فصل ۱۰: <span dir="ltr">Batch Processing</span></a></li>
+  <li><a href="./chapters/11-stream-processing/README.md">فصل ۱۱: <span dir="ltr">Stream Processing</span></a></li>
+  <li><a href="./chapters/12-future-of-data-systems/README.md">فصل ۱۲: <span dir="ltr">Future of Data Systems</span></a></li>
+</ul>
 
-### منابع داخلی پروژه
+<h3 dir="rtl" align="right">منابع داخلی پروژه</h3>
 
-- [واژه‌نامهٔ اصطلاحات](./glossary/README.md)
-- [راهنمای یکدستی اصطلاحات](./TERMINOLOGY.md)
-- [راهنمای سبک نگارش](./STYLE_GUIDE.md)
-- [راهنمای مشارکت](./CONTRIBUTING.md)
+<ul dir="rtl" align="right">
+  <li><a href="./glossary/README.md">واژه‌نامهٔ اصطلاحات</a></li>
+  <li><a href="./TERMINOLOGY.md">راهنمای یکدستی اصطلاحات</a></li>
+  <li><a href="./STYLE_GUIDE.md">راهنمای سبک نگارش</a></li>
+  <li><a href="./CONTRIBUTING.md">راهنمای مشارکت</a></li>
+</ul>
 
 ## روش مطالعه
 
