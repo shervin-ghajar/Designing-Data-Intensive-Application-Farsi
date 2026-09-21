@@ -27,7 +27,7 @@
 
 ## واژه‌هایی که ترجمه نمی‌شوند
 
-این واژه‌ها در متن و عنوان‌ها به همان شکل انگلیسی و داخل code span می‌آیند؛ سپس با فارسی ساده توضیح داده می‌شوند:
+این واژه‌ها در متن و عنوان‌ها به همان شکل انگلیسی می‌آیند؛ برای خوانایی می‌توان آن‌ها را با code span یا bold مشخص کرد و سپس با فارسی ساده توضیح داد:
 
 `idempotency`, `idempotent`, `document`, `relational`, `database`, `cache`, `API`, `REST`, `RPC`, `schema`, `outbox`, `inbox`, `saga`, `retry`, `timeout`, `backoff`, `jitter`, `CDC`, `event sourcing`, `Kafka`, `SQL`, `NoSQL`, `WAL`, `B-tree`, `LSM-tree`, `MapReduce`, `OLTP`, `OLAP`, `atomicity`, `quorum`, `leader`, `follower`, `partition`, `partitioning`, `sharding`, `rebalancing`, `replication`, `normalization`, `denormalization`, `consistency`, `consensus`, `linearizability`, `compatibility`, `reliability`, `scalability`, `maintainability`, `operability`, `simplicity`, `evolvability`.
 
