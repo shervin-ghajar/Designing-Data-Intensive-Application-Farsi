@@ -1,6 +1,6 @@
 # پیشگفتار
 
-## `Preface`
+## &rlm;<span dir="ltr">`Preface`</span>
 
 اگر در سال‌های اخیر در مهندسی نرم‌افزار، به‌ویژه در سامانه‌های server-side و backend، کار کرده باشید، احتمالاً با انبوهی از واژه‌های مد روز دربارهٔ ذخیره‌سازی و پردازش data روبه‌رو شده‌اید: `NoSQL`، `Big Data`، `web-scale`، `sharding`، `eventual consistency`، `ACID`، `CAP theorem`، cloud services، `MapReduce` و real-time.
 
@@ -50,7 +50,7 @@
 2. **بخش دوم** از data ذخیره‌شده روی یک ماشین به dataای می‌رود که میان چند ماشین توزیع شده است. `replication`، `partitioning` یا `sharding` و `transaction`ها بررسی می‌شوند و بعد کتاب به مسئله‌های distributed systemها و معنای consistency و consensus می‌پردازد.
 3. **بخش سوم** دربارهٔ systemهایی است که datasetها را از datasetهای دیگر می‌سازند. `Derived data` در systemهای ناهمگون با ترکیب database، cache، index و ابزارهای دیگر شکل می‌گیرد. فصل ۱۰ `batch processing`، فصل ۱۱ `stream processing` و فصل ۱۲ معماری applicationهای reliable، scalable و maintainable در آینده را بررسی می‌کند.
 
-## References و مطالعهٔ بیشتر
+## &rlm;References و مطالعهٔ بیشتر
 
 بخش بزرگی از مطالب کتاب پیش‌تر در conference presentationها، research paperها، blogها، code، bug trackerها، mailing listها و تجربه‌های مهندسی بیان شده‌اند. کتاب مهم‌ترین ایده‌ها را از منابع مختلف جمع می‌کند و در پایان هر فصل به منابع اصلی اشاره می‌کند. بیشتر این منابع برای مطالعهٔ عمیق‌تر به‌صورت آزاد در Internet در دسترس‌اند.
 

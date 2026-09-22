@@ -1,20 +1,23 @@
 # فصل ۱: `Reliability`، `Scalability` و `Maintainability`
 
-## `Reliable`, `Scalable` و `Maintainable` applications
+## &rlm;`Reliable`, `Scalable` و `Maintainable` applications
 
-> اینترنت آن‌قدر خوب ساخته شده است که بیشتر مردم آن را مثل یک منبع طبیعی، شبیه اقیانوس آرام، می‌بینند؛ نه چیزی که انسان‌ها ساخته باشند. آخرین بار چه زمانی فناوری‌ای با چنین scaleای این‌قدر کم‌خطا بوده است؟
->
-> — Alan Kay، گفت‌وگو با *Dr Dobb’s Journal*، ۲۰۱۲
+<blockquote dir="rtl" align="right">
+  <p dir="rtl" align="right">اینترنت آن‌قدر خوب ساخته شده است که بیشتر مردم آن را مثل یک منبع طبیعی، شبیه اقیانوس آرام، می‌بینند؛ نه چیزی که انسان‌ها ساخته باشند. آخرین بار چه زمانی فناوری‌ای با چنین <span dir="ltr">scale</span>ای این‌قدر کم‌خطا بوده است؟</p>
+  <p dir="rtl" align="right">— <span dir="ltr">Alan Kay</span>، گفت‌وگو با <em dir="ltr">Dr Dobb’s Journal</em>، ۲۰۱۲</p>
+</blockquote>
 
 امروزه بسیاری از applicationها `data-intensive` هستند، نه `compute-intensive`. قدرت خام CPU به‌ندرت محدودیت اصلی این applicationهاست. مسئله‌های بزرگ‌تر معمولاً مقدار data، پیچیدگی data و سرعت تغییر آن هستند.
 
 یک `data-intensive application` معمولاً از building blockهای استانداردی ساخته می‌شود که قابلیت‌های پرکاربرد را فراهم می‌کنند. برای نمونه، بسیاری از applicationها لازم دارند:
 
-- data را ذخیره کنند تا خودشان یا application دیگری بتواند بعداً آن را پیدا کند؛ این کار را database انجام می‌دهد.
-- نتیجهٔ یک operation پرهزینه را به خاطر بسپارند تا readها سریع‌تر شوند؛ این کار را cache انجام می‌دهد.
-- به user اجازه دهند با keyword یا filterهای مختلف در data جست‌وجو کند؛ این کار را search index انجام می‌دهد.
-- messageای را به process دیگری بفرستند تا آن process آن را به‌صورت asynchronous پردازش کند؛ این کار به message system یا stream processing مربوط می‌شود.
-- مقدار زیادی data جمع‌شده را هر چند وقت یک‌بار پردازش کنند؛ این کار را `batch processing` انجام می‌دهد.
+<ul dir="rtl" align="right">
+  <li><span dir="ltr">data</span> را ذخیره کنند تا خودشان یا <span dir="ltr">application</span> دیگری بتواند بعداً آن را پیدا کند؛ این کار را <span dir="ltr">database</span> انجام می‌دهد.</li>
+  <li>نتیجهٔ یک <span dir="ltr">operation</span> پرهزینه را به خاطر بسپارند تا <span dir="ltr">read</span>ها سریع‌تر شوند؛ این کار را <span dir="ltr">cache</span> انجام می‌دهد.</li>
+  <li>به <span dir="ltr">user</span> اجازه دهند با <span dir="ltr">keyword</span> یا <span dir="ltr">filter</span>های مختلف در <span dir="ltr">data</span> جست‌وجو کند؛ این کار را <span dir="ltr">search index</span> انجام می‌دهد.</li>
+  <li><span dir="ltr">message</span>ای را به <span dir="ltr">process</span> دیگری بفرستند تا آن <span dir="ltr">process</span> آن را به‌صورت <span dir="ltr">asynchronous</span> پردازش کند؛ این کار به <span dir="ltr">message system</span> یا <span dir="ltr">stream processing</span> مربوط می‌شود.</li>
+  <li>مقدار زیادی <span dir="ltr">data</span> جمع‌شده را هر چند وقت یک‌بار پردازش کنند؛ این کار را <code dir="ltr">batch processing</code> انجام می‌دهد.</li>
+</ul>
 
 اگر این نکته‌ها خیلی بدیهی به نظر می‌رسند، دلیلش موفقیت همین abstractionهاست: ما همیشه از data systemها استفاده می‌کنیم، بدون اینکه زیاد به آن‌ها فکر کنیم. هنگام ساخت application، بیشتر engineerها به فکر نوشتن storage engine جدید از صفر نمی‌افتند؛ چون database برای این کار ابزار خوبی است.
 
@@ -49,27 +52,27 @@
 
 در این کتاب روی سه دغدغه تمرکز می‌کنیم که در بیشتر software systemها مهم‌اند:
 
-### `Reliability`
+### &rlm;<span dir="ltr">`Reliability`</span>
 
-system باید حتی هنگام adversity، مانند fault سخت‌افزاری، fault نرم‌افزاری یا خطای انسانی، درست کار کند؛ یعنی function درست را با level مورد انتظار از performance انجام دهد.
+&rlm;system باید حتی هنگام adversity، مانند fault سخت‌افزاری، fault نرم‌افزاری یا خطای انسانی، درست کار کند؛ یعنی function درست را با level مورد انتظار از performance انجام دهد.
 
-### `Scalability`
+### &rlm;<span dir="ltr">`Scalability`</span>
 
 با رشد system از نظر حجم data، حجم traffic یا complexity، باید روش‌های معقولی برای کنارآمدن با این رشد وجود داشته باشد.
 
-### `Maintainability`
+### &rlm;<span dir="ltr">`Maintainability`</span>
 
 در طول زمان افراد زیادی در engineering و operations روی system کار می‌کنند. آن‌ها باید بتوانند رفتار فعلی system را نگه دارند و آن را برای use caseهای جدید با productivity مناسب تغییر دهند.
 
 این واژه‌ها زیاد استفاده می‌شوند، بدون اینکه معنی‌شان دقیق روشن باشد. در ادامهٔ فصل، روش‌های فکرکردن دربارهٔ `reliability`، `scalability` و `maintainability` را بررسی می‌کنیم و در فصل‌های بعد سراغ techniqueها، architectureها و algorithmهایی می‌رویم که به رسیدن به این هدف‌ها کمک می‌کنند.
 
-## `Reliability`
+## &rlm;<span dir="ltr">`Reliability`</span>
 
 همهٔ ما به‌صورت شهودی می‌دانیم چیزی reliable یا unreliable یعنی چه. انتظارهای معمول از software چنین‌اند:
 
-- application همان functionی را انجام دهد که user انتظار دارد.
+- &rlm;application همان functionی را انجام دهد که user انتظار دارد.
 - بتواند اشتباه user یا استفادهٔ غیرمنتظره از software را تحمل کند.
-- performance آن، با توجه به use case، load و حجم data مورد انتظار، کافی باشد.
+- &rlm;performance آن، با توجه به use case، load و حجم data مورد انتظار، کافی باشد.
 - جلوی دسترسی غیرمجاز و سوءاستفاده را بگیرد.
 
 اگر مجموع این موارد را «درست کارکردن» بدانیم، `reliability` یعنی system حتی وقتی مشکلی پیش می‌آید، همچنان درست کار کند.
@@ -82,7 +85,7 @@ system باید حتی هنگام adversity، مانند fault سخت‌افزا
 
 با اینکه معمولاً تحمل fault را به پیشگیری از آن ترجیح می‌دهیم، گاهی prevention بهتر از cure است؛ مخصوصاً وقتی cure وجود ندارد. موضوع‌های security چنین‌اند: اگر attacker وارد system شده و به data حساس دسترسی پیدا کرده باشد، آن اتفاق را نمی‌توان برگرداند. این کتاب بیشتر دربارهٔ faultهایی است که می‌توان آن‌ها را کنترل یا جبران کرد.
 
-## `Hardware Faults`
+## &rlm;<span dir="ltr">`Hardware Faults`</span>
 
 وقتی به علت‌های failure فکر می‌کنیم، fault سخت‌افزار سریع به ذهن می‌آید: hard disk خراب می‌شود، RAM از کار می‌افتد، شبکهٔ برق قطع می‌شود یا کسی کابل network اشتباه را می‌کشد. هرکس در data center بزرگ کار کرده باشد می‌داند وقتی تعداد machineها زیاد باشد، این اتفاق‌ها مرتب رخ می‌دهند.
 
@@ -96,7 +99,7 @@ system باید حتی هنگام adversity، مانند fault سخت‌افزا
 
 به همین دلیل systemها به سمت تحمل ازدست‌رفتن کل machine رفته‌اند؛ با استفاده از software fault tolerance در کنار یا به‌جای hardware redundancy. این systemها از نظر operations هم مزیت دارند. یک single-server system برای reboot، مثلاً جهت نصب security patch سیستم‌عامل، به planned downtime نیاز دارد؛ اما systemی که failure یک machine را تحمل می‌کند می‌تواند nodeها را یکی‌یکی patch کند، بدون آنکه کل service متوقف شود. به این کار rolling upgrade می‌گویند.
 
-## `Software Errors`
+## &rlm;<span dir="ltr">`Software Errors`</span>
 
 معمولاً hardware faultها را تصادفی و مستقل از یکدیگر می‌دانیم: خراب‌شدن disk یک machine الزاماً به معنی خراب‌شدن disk machine دیگر نیست. ممکن است correlation ضعیفی به‌علت یک علت مشترک، مانند دمای rack، وجود داشته باشد؛ اما معمولاً بعید است تعداد زیادی component سخت‌افزاری هم‌زمان از کار بیفتند.
 
@@ -104,39 +107,39 @@ system باید حتی هنگام adversity، مانند fault سخت‌افزا
 
 - یک software bug باعث شود همهٔ instanceهای application server با دریافت یک input بد مشخص crash کنند. برای نمونه، leap second در ۳۰ ژوئن ۲۰۱۲ به‌دلیل bug در Linux kernel باعث شد applicationهای زیادی هم‌زمان hang شوند [۹].
 - یک runaway process یک resource مشترک مانند CPU time، memory، disk space یا network bandwidth را تمام کند.
-- serviceای که system به آن وابسته است کند شود، پاسخ ندهد یا responseهای خراب برگرداند.
+- &rlm;serviceای که system به آن وابسته است کند شود، پاسخ ندهد یا responseهای خراب برگرداند.
 - یک fault کوچک در یک component، fault دیگری ایجاد کند و آن fault نیز faultهای بعدی را فعال کند؛ این وضعیت `cascading failure` نام دارد [۱۰].
 
-bugهایی که این نوع software fault را ایجاد می‌کنند ممکن است مدت‌ها پنهان بمانند و فقط در مجموعه‌ای غیرعادی از شرایط فعال شوند. در آن لحظه معلوم می‌شود software دربارهٔ محیطش یک assumption داشته است؛ assumptionی که معمولاً درست بوده، اما به دلیلی دیگر درست نیست [۱۱].
+&rlm;bugهایی که این نوع software fault را ایجاد می‌کنند ممکن است مدت‌ها پنهان بمانند و فقط در مجموعه‌ای غیرعادی از شرایط فعال شوند. در آن لحظه معلوم می‌شود software دربارهٔ محیطش یک assumption داشته است؛ assumptionی که معمولاً درست بوده، اما به دلیلی دیگر درست نیست [۱۱].
 
 برای systematic faultهای software راه‌حل سریع و واحدی وجود ندارد. چند کار کوچک کمک می‌کند: assumptionها و interactionهای system را با دقت بررسی کنیم؛ test کامل بنویسیم؛ processها را isolate کنیم؛ اجازه دهیم processها crash و restart شوند؛ و behavior system را در production اندازه‌گیری، monitor و تحلیل کنیم. اگر system باید guarantee مشخصی بدهد، مثلاً در یک message queue تعداد messageهای ورودی با خروجی برابر باشد، می‌تواند هنگام اجرا خودش را دائماً check کند و در صورت پیدا کردن اختلاف alert بدهد [۱۲].
 
-## `Human Errors`
+## &rlm;<span dir="ltr">`Human Errors`</span>
 
 انسان‌ها software systemها را design و build می‌کنند و operatorهایی که system را روشن نگه می‌دارند نیز انسان‌اند. حتی با بهترین نیت، انسان‌ها خطا می‌کنند. یک مطالعه روی internet serviceهای بزرگ نشان داده است که configuration error توسط operatorها علت اصلی outage بوده، درحالی‌که hardware fault، یعنی مشکل server یا network، فقط در ۱۰ تا ۲۵ درصد outageها نقش داشته است [۱۳].
 
 چطور با وجود انسان‌های خطاپذیر، system reliable بسازیم؟ systemهای خوب چند روش را با هم ترکیب می‌کنند:
 
-- system را طوری design کنیم که فرصت خطا کم شود. abstraction، API و admin interface خوب باید انجام‌دادن کار درست را آسان و انجام‌دادن کار اشتباه را سخت کنند. البته اگر interface بیش‌ازحد restrictive باشد، افراد راهی دور آن پیدا می‌کنند؛ بنابراین باید تعادل مناسبی ساخت.
+- &rlm;system را طوری design کنیم که فرصت خطا کم شود. abstraction، API و admin interface خوب باید انجام‌دادن کار درست را آسان و انجام‌دادن کار اشتباه را سخت کنند. البته اگر interface بیش‌ازحد restrictive باشد، افراد راهی دور آن پیدا می‌کنند؛ بنابراین باید تعادل مناسبی ساخت.
 - محل‌هایی را که انسان‌ها بیشتر اشتباه می‌کنند از محل‌هایی که می‌توانند failure ایجاد کنند جدا کنیم. به‌ویژه باید sandboxهای کامل و غیرproduction داشته باشیم تا افراد بتوانند با data واقعی امن آزمایش کنند، بدون اینکه user واقعی آسیب ببیند.
 - در همهٔ levelها test کامل انجام دهیم: از unit test تا integration test کل system و test دستی [۳]. automated test برای پوشش corner caseهایی که در operation عادی به‌ندرت رخ می‌دهند ارزش زیادی دارد.
-- recovery از human error را سریع و ساده کنیم تا اثر failure کم شود. rollback کردن configuration را آسان کنیم، code جدید را تدریجی rollout کنیم تا bug احتمالی فقط به بخش کوچکی از userها برسد و toolهایی برای recompute data داشته باشیم؛ چون ممکن است بعداً معلوم شود محاسبهٔ قبلی غلط بوده است.
-- monitoring روشن و جزئی راه‌اندازی کنیم؛ مانند performance metric و error rate. در مهندسی به این کار telemetry نیز می‌گویند. monitoring می‌تواند early warning بدهد و نشان دهد assumption یا constraintای نقض شده است. هنگام بروز مشکل، metricها برای diagnosis بسیار باارزش‌اند.
-- management practice و training مناسب داشته باشیم. این موضوع مهم و پیچیده است، اما خارج از دامنهٔ این کتاب است.
+- &rlm;recovery از human error را سریع و ساده کنیم تا اثر failure کم شود. rollback کردن configuration را آسان کنیم، code جدید را تدریجی rollout کنیم تا bug احتمالی فقط به بخش کوچکی از userها برسد و toolهایی برای recompute data داشته باشیم؛ چون ممکن است بعداً معلوم شود محاسبهٔ قبلی غلط بوده است.
+- &rlm;monitoring روشن و جزئی راه‌اندازی کنیم؛ مانند performance metric و error rate. در مهندسی به این کار telemetry نیز می‌گویند. monitoring می‌تواند early warning بدهد و نشان دهد assumption یا constraintای نقض شده است. هنگام بروز مشکل، metricها برای diagnosis بسیار باارزش‌اند.
+- &rlm;management practice و training مناسب داشته باشیم. این موضوع مهم و پیچیده است، اما خارج از دامنهٔ این کتاب است.
 
-## `Reliability` چقدر مهم است؟
+## &rlm;`Reliability` چقدر مهم است؟
 
-reliability فقط برای نیروگاه هسته‌ای و software کنترل ترافیک هوایی نیست. applicationهای عادی نیز باید reliable باشند. bug در business application باعث کاهش productivity و حتی risk حقوقی می‌شود؛ مثلاً وقتی عددی اشتباه گزارش شود. outage در ecommerce نیز می‌تواند از نظر درآمد ازدست‌رفته و آسیب به reputation هزینهٔ بزرگی داشته باشد.
+&rlm;reliability فقط برای نیروگاه هسته‌ای و software کنترل ترافیک هوایی نیست. applicationهای عادی نیز باید reliable باشند. bug در business application باعث کاهش productivity و حتی risk حقوقی می‌شود؛ مثلاً وقتی عددی اشتباه گزارش شود. outage در ecommerce نیز می‌تواند از نظر درآمد ازدست‌رفته و آسیب به reputation هزینهٔ بزرگی داشته باشد.
 
 حتی در applicationهای «غیرحیاتی» مسئول user خود هستیم. پدر یا مادری را تصور کنید که همهٔ عکس‌ها و videoهای فرزندانش را در photo application شما نگه داشته است. اگر database ناگهان خراب شود چه احساسی خواهد داشت؟ آیا می‌داند چطور آن را از backup restore کند؟
 
 گاهی ممکن است برای کم‌کردن development cost، مثلاً هنگام ساخت prototype محصولی که بازارش ثابت نشده، یا برای کم‌کردن operational cost، مثلاً در serviceای با profit margin بسیار کم، بخشی از reliability را قربانی کنیم. اما باید کاملاً آگاه باشیم که کجا و چرا shortcut می‌زنیم.
 
-## `Scalability`
+## &rlm;<span dir="ltr">`Scalability`</span>
 
 حتی اگر system امروز reliable کار کند، لزوماً در آینده نیز همین‌طور نخواهد بود. یکی از علت‌های رایج degradation، زیادشدن load است: شاید system از ۱۰٬۰۰۰ user هم‌زمان به ۱۰۰٬۰۰۰ user رسیده باشد یا از یک میلیون به ده میلیون record پردازش کند. شاید حجم data بسیار بزرگ‌تر شده باشد.
 
-`Scalability` اصطلاحی برای توان system در کنارآمدن با load بیشتر است. اما scalability یک برچسب تک‌بعدی نیست که بتوان روی system چسباند. گفتن «X scalable است» یا «Y scale نمی‌شود» به‌تنهایی بی‌معناست. باید بپرسیم اگر system از یک جهت مشخص رشد کند، چه گزینه‌هایی برای کنارآمدن با growth داریم و چطور resource محاسباتی اضافه کنیم.
+&rlm;`Scalability` اصطلاحی برای توان system در کنارآمدن با load بیشتر است. اما scalability یک برچسب تک‌بعدی نیست که بتوان روی system چسباند. گفتن «X scalable است» یا «Y scale نمی‌شود» به‌تنهایی بی‌معناست. باید بپرسیم اگر system از یک جهت مشخص رشد کند، چه گزینه‌هایی برای کنارآمدن با growth داریم و چطور resource محاسباتی اضافه کنیم.
 
 ### توصیف `Load`
 
@@ -144,9 +147,9 @@ reliability فقط برای نیروگاه هسته‌ای و software کنتر�
 
 برای روشن‌شدن موضوع، Twitter را در نظر بگیرید. دو operation اصلی آن در نوامبر ۲۰۱۲ چنین بودند [۱۶]:
 
-**Post tweet**: یک user message جدیدی برای followerهایش منتشر می‌کند؛ به‌طور میانگین ۴٫۶ هزار request در ثانیه و در peak بیش از ۱۲ هزار request در ثانیه.
+&rlm;**Post tweet**: یک user message جدیدی برای followerهایش منتشر می‌کند؛ به‌طور میانگین ۴٫۶ هزار request در ثانیه و در peak بیش از ۱۲ هزار request در ثانیه.
 
-**Home timeline**: یک user tweetهای افرادی را که follow می‌کند می‌بیند؛ حدود ۳۰۰ هزار request در ثانیه.
+&rlm;**Home timeline**: یک user tweetهای افرادی را که follow می‌کند می‌بیند؛ حدود ۳۰۰ هزار request در ثانیه.
 
 رسیدگی به ۱۲٬۰۰۰ write در ثانیه به‌تنهایی چندان دشوار نیست. چالش اصلی scale در Twitter حجم tweet نیست؛ `fan-out` است. هر user افراد زیادی را follow می‌کند و هر user نیز followerهای زیادی دارد. دو روش کلی برای پیاده‌سازی این operationها وجود دارد.
 
@@ -186,9 +189,9 @@ WHERE follows.follower_id = current_user
 
 برای پاسخ به این سؤال‌ها به performance number نیاز داریم. در `batch processing`، معمولاً `throughput` مهم است: چند record در ثانیه پردازش می‌شود یا اجرای job روی datasetی با اندازهٔ مشخص چقدر طول می‌کشد. در online systemها، معمولاً `response time` مهم‌تر است؛ یعنی فاصلهٔ زمانی میان فرستادن request توسط client و دریافت response.
 
-### `Latency` و `Response time`
+### &rlm;`Latency` و `Response time`
 
-latency و response time گاهی مترادف به کار می‌روند، اما یکی نیستند. response time چیزی است که client می‌بیند: علاوه بر زمان واقعی پردازش request یا service time، network delay و queueing delay را هم شامل می‌شود. latency مدت زمانی است که request منتظر رسیدگی می‌ماند.
+&rlm;latency و response time گاهی مترادف به کار می‌روند، اما یکی نیستند. response time چیزی است که client می‌بیند: علاوه بر زمان واقعی پردازش request یا service time، network delay و queueing delay را هم شامل می‌شود. latency مدت زمانی است که request منتظر رسیدگی می‌ماند.
 
 حتی اگر یک request یکسان را بارها بفرستید، response time در هر بار کمی فرق می‌کند. در systemی که requestهای مختلف را پردازش می‌کند، این تفاوت زیاد است. بنابراین response time را نباید یک عدد واحد دانست؛ باید آن را به شکل distribution اندازه گرفت.
 
@@ -196,9 +199,9 @@ latency و response time گاهی مترادف به کار می‌روند، ا�
 
 برای فهمیدن وضعیت outlierها به percentileهای بالاتر نگاه می‌کنیم: p95، p99 و p999. p95 یعنی ۹۵ درصد requestها سریع‌تر از آن threshold هستند و ۵ درصد کندتر یا برابرند. `Tail latency` همان latency در percentileهای بالاست و مستقیماً تجربهٔ user را تحت تأثیر می‌گذارد.
 
-Amazon requirementهای response time سرویس‌های داخلی را با p99 توصیف می‌کند، حتی اگر فقط یک request از هر هزار request را تحت تأثیر قرار دهد؛ چون requestهای کند معمولاً به accountهایی مربوط‌اند که data بیشتری دارند و مشتریان ارزشمندتری هستند [۱۹]. Amazon گزارش کرده است که ۱۰۰ میلی‌ثانیه افزایش response time می‌تواند فروش را یک درصد کم کند [۲۰]. در عین حال، optimizeکردن p99.99 ممکن است آن‌قدر پرهزینه باشد که منفعت کافی نداشته باشد.
+&rlm;Amazon requirementهای response time سرویس‌های داخلی را با p99 توصیف می‌کند، حتی اگر فقط یک request از هر هزار request را تحت تأثیر قرار دهد؛ چون requestهای کند معمولاً به accountهایی مربوط‌اند که data بیشتری دارند و مشتریان ارزشمندتری هستند [۱۹]. Amazon گزارش کرده است که ۱۰۰ میلی‌ثانیه افزایش response time می‌تواند فروش را یک درصد کم کند [۲۰]. در عین حال، optimizeکردن p99.99 ممکن است آن‌قدر پرهزینه باشد که منفعت کافی نداشته باشد.
 
-percentileها در `SLO` و `SLA` نیز استفاده می‌شوند. این contractها performance و availability مورد انتظار service را تعریف می‌کنند. برای نمونه، SLA می‌تواند بگوید service زمانی up است که median response time کمتر از ۲۰۰ میلی‌ثانیه و p99 کمتر از یک ثانیه باشد و service حداقل ۹۹٫۹ درصد زمان در دسترس بماند. اگر این شرط‌ها رعایت نشوند، customer ممکن است refund بخواهد.
+&rlm;percentileها در `SLO` و `SLA` نیز استفاده می‌شوند. این contractها performance و availability مورد انتظار service را تعریف می‌کنند. برای نمونه، SLA می‌تواند بگوید service زمانی up است که median response time کمتر از ۲۰۰ میلی‌ثانیه و p99 کمتر از یک ثانیه باشد و service حداقل ۹۹٫۹ درصد زمان در دسترس بماند. اگر این شرط‌ها رعایت نشوند، customer ممکن است refund بخواهد.
 
 ![شکل ۱-۴: نمایش mean و percentile برای response time تعدادی request](../../assets/figures/ch01/figure-1-4.png)
 
@@ -206,9 +209,9 @@ percentileها در `SLO` و `SLA` نیز استفاده می‌شوند. این
 
 هنگام load test، client تولیدکنندهٔ load باید مستقل از response time به فرستادن request ادامه دهد. اگر client تا پایان request قبلی صبر کند، queueها در test کوتاه‌تر از واقعیت می‌شوند و measurement به‌طور مصنوعی بهتر دیده می‌شود.
 
-### `Percentiles` در عمل
+### &rlm;`Percentiles` در عمل
 
-percentileهای بالا در backend serviceهایی مهم‌ترند که برای پاسخ یک end-user چند بار فراخوانی می‌شوند. حتی اگر callها parallel باشند، end-user باید تا کندترین call صبر کند. یک call کند می‌تواند کل request را کند کند؛ این اثر `tail latency amplification` نام دارد.
+&rlm;percentileهای بالا در backend serviceهایی مهم‌ترند که برای پاسخ یک end-user چند بار فراخوانی می‌شوند. حتی اگر callها parallel باشند، end-user باید تا کندترین call صبر کند. یک call کند می‌تواند کل request را کند کند؛ این اثر `tail latency amplification` نام دارد.
 
 برای افزودن percentile به monitoring dashboard باید آن‌ها را به‌طور مداوم حساب کنیم. مثلاً یک rolling window از response timeهای ۱۰ دقیقهٔ اخیر نگه می‌داریم و هر دقیقه median و percentileهای مختلف را از آن حساب می‌کنیم.
 
@@ -232,7 +235,7 @@ percentileهای بالا در backend serviceهایی مهم‌ترند که ب
 
 با وجود application-specific بودن، architectureهای scalable معمولاً از building blockهای عمومی در patternهای آشنا ساخته می‌شوند. در فصل‌های این کتاب همین building blockها و patternها را بررسی می‌کنیم.
 
-## `Maintainability`
+## &rlm;<span dir="ltr">`Maintainability`</span>
 
 بخش بزرگی از هزینهٔ software در development اولیه نیست؛ در maintenance مداوم است: fixکردن bug، operational نگه‌داشتن system، بررسی failure، سازگارکردن با platform جدید، تغییر برای use caseهای جدید، پرداخت technical debt و افزودن feature.
 
@@ -240,21 +243,21 @@ percentileهای بالا در backend serviceهایی مهم‌ترند که ب
 
 بااین‌حال می‌توان software را طوری طراحی کرد که درد maintenance کمتر شود و خودمان legacy software تازه‌ای نسازیم. برای این هدف روی سه اصل تمرکز می‌کنیم:
 
-### `Operability`
+### &rlm;<span dir="ltr">`Operability`</span>
 
 کار تیم operations را برای روشن و سالم نگه‌داشتن system آسان کنیم.
 
-### `Simplicity`
+### &rlm;<span dir="ltr">`Simplicity`</span>
 
-complexity غیرضروری را از system کم کنیم تا engineer جدید بتواند آن را بفهمد. این با ساده‌بودن user interface یکی نیست.
+&rlm;complexity غیرضروری را از system کم کنیم تا engineer جدید بتواند آن را بفهمد. این با ساده‌بودن user interface یکی نیست.
 
-### `Evolvability`
+### &rlm;<span dir="ltr">`Evolvability`</span>
 
 تغییر system در آینده را آسان کنیم تا با requirementها و use caseهای پیش‌بینی‌نشده سازگار شود. به این ویژگی extensibility، modifiability یا plasticity هم گفته می‌شود.
 
 برای این هدف‌ها نیز راه‌حل آسانی وجود ندارد؛ باید هنگام فکرکردن دربارهٔ system، operability، simplicity و evolvability را از ابتدا در نظر بگیریم.
 
-### `Operability`: آسان‌کردن زندگی operations
+### &rlm;`Operability`: آسان‌کردن زندگی operations
 
 گفته شده است: «operations خوب اغلب می‌تواند محدودیت‌های software بد یا ناقص را دور بزند، اما software خوب با operations بد نمی‌تواند reliable اجرا شود» [۱۲]. بعضی کارهای operations را می‌توان automate کرد، اما انسان‌ها باید آن automation را بسازند و درست‌بودنش را بررسی کنند.
 
@@ -262,18 +265,18 @@ complexity غیرضروری را از system کم کنیم تا engineer جدی�
 
 - سلامت system را monitor می‌کند و اگر system وارد وضعیت بد شد، service را سریع restore می‌کند.
 - علت مشکل‌هایی مانند system failure یا performance degradation را پیدا می‌کند.
-- software و platform، از جمله security patchها، را به‌روز نگه می‌دارد.
+- &rlm;software و platform، از جمله security patchها، را به‌روز نگه می‌دارد.
 - اثر systemها بر یکدیگر را دنبال می‌کند تا change مشکل‌ساز پیش از ایجاد آسیب متوقف شود.
 - مشکل‌های آینده را پیش‌بینی می‌کند و پیش از وقوع برایشان راه‌حل می‌سازد؛ مثلاً capacity planning انجام می‌دهد.
-- practice و tool خوب برای deployment و configuration management می‌سازد.
-- maintenance پیچیده، مانند انتقال application از یک platform به platform دیگر، را انجام می‌دهد.
+- &rlm;practice و tool خوب برای deployment و configuration management می‌سازد.
+- &rlm;maintenance پیچیده، مانند انتقال application از یک platform به platform دیگر، را انجام می‌دهد.
 - هنگام تغییر configuration، security system را حفظ می‌کند.
-- processهایی تعریف می‌کند که operations را قابل‌پیش‌بینی و production environment را stable نگه دارند.
+- &rlm;processهایی تعریف می‌کند که operations را قابل‌پیش‌بینی و production environment را stable نگه دارند.
 - دانش سازمان دربارهٔ system را حفظ می‌کند، حتی وقتی افراد تیم عوض می‌شوند.
 
-operability خوب یعنی کارهای روزمره ساده باشند تا تیم operations وقت خود را روی فعالیت‌های باارزش‌تر بگذارد. data system می‌تواند با monitoring خوب، visibility مناسب از runtime behavior و internals، پشتیبانی از automation و integration با toolهای استاندارد، پرهیز از وابستگی به یک machine، documentation روشن و defaultهای مناسب این کار را آسان کند. system باید در صورت لزوم self-healing داشته باشد، اما administrator را از کنترل دستی محروم نکند؛ behavior آن قابل‌پیش‌بینی باشد و surprise کم ایجاد کند.
+&rlm;operability خوب یعنی کارهای روزمره ساده باشند تا تیم operations وقت خود را روی فعالیت‌های باارزش‌تر بگذارد. data system می‌تواند با monitoring خوب، visibility مناسب از runtime behavior و internals، پشتیبانی از automation و integration با toolهای استاندارد، پرهیز از وابستگی به یک machine، documentation روشن و defaultهای مناسب این کار را آسان کند. system باید در صورت لزوم self-healing داشته باشد، اما administrator را از کنترل دستی محروم نکند؛ behavior آن قابل‌پیش‌بینی باشد و surprise کم ایجاد کند.
 
-### `Simplicity`: مدیریت complexity
+### &rlm;`Simplicity`: مدیریت complexity
 
 پروژه‌های کوچک ممکن است code ساده و بیانگر داشته باشند، اما با بزرگ‌شدن پروژه، فهمیدن آن سخت و پیچیده می‌شود. این complexity کار همهٔ افرادی را که روی system کار می‌کنند کند می‌کند و هزینهٔ maintenance را بالا می‌برد. پروژه‌ای که در complexity گیر کرده باشد گاهی `big ball of mud` نامیده می‌شود [۳۰].
 
@@ -287,7 +290,7 @@ operability خوب یعنی کارهای روزمره ساده باشند تا �
 
 پیداکردن abstraction خوب دشوار است. در distributed systems algorithmهای خوبی وجود دارند، اما بسته‌بندی آن‌ها در abstractionهایی که complexity را در سطح قابل‌مدیریت نگه دارند، مسئلهٔ ساده‌ای نیست. در سراسر کتاب دنبال abstractionهای خوبی می‌گردیم که بتوانند بخش‌های بزرگ system را به componentهای reusable و well-defined تبدیل کنند.
 
-### `Evolvability`: آسان‌کردن تغییر
+### &rlm;`Evolvability`: آسان‌کردن تغییر
 
 بسیار بعید است requirementهای system برای همیشه ثابت بمانند. معمولاً data و واقعیت‌های جدید یاد می‌گیریم، use caseهای پیش‌بینی‌نشده ظاهر می‌شوند، اولویت کسب‌وکار تغییر می‌کند، userها feature جدید می‌خواهند، platformهای جدید جای قدیمی را می‌گیرند و قانون یا regulation عوض می‌شود.
 
@@ -303,11 +306,11 @@ operability خوب یعنی کارهای روزمره ساده باشند تا �
 
 یک application برای مفیدبودن باید requirementهای مختلفی را برآورده کند. بعضی requirementها functional هستند؛ یعنی application باید چه کاری انجام دهد، مانند storage، retrieval، search و processing data. بعضی requirementها nonfunctional هستند؛ مانند security، reliability، compliance، scalability، compatibility و maintainability. در این فصل reliability، scalability و maintainability را با جزئیات بیشتری بررسی کردیم.
 
-reliability یعنی system حتی هنگام وقوع fault درست کار کند. fault می‌تواند در hardware، software یا انسان باشد. fault سخت‌افزاری معمولاً random و uncorrelated است؛ bug نرم‌افزاری بیشتر systematic و دشوار است؛ و انسان‌ها نیز گاهی ناگزیر اشتباه می‌کنند. fault-tolerance می‌تواند بعضی نوع‌های fault را از user نهایی پنهان کند.
+&rlm;reliability یعنی system حتی هنگام وقوع fault درست کار کند. fault می‌تواند در hardware، software یا انسان باشد. fault سخت‌افزاری معمولاً random و uncorrelated است؛ bug نرم‌افزاری بیشتر systematic و دشوار است؛ و انسان‌ها نیز گاهی ناگزیر اشتباه می‌کنند. fault-tolerance می‌تواند بعضی نوع‌های fault را از user نهایی پنهان کند.
 
-scalability یعنی strategyهایی برای خوب نگه‌داشتن performance هنگام افزایش load داشته باشیم. برای بحث دربارهٔ scalability، ابتدا باید load و performance را کمی‌سازی کنیم. Twitter نمونه‌ای برای توصیف load و response-time percentile نمونه‌ای برای سنجش performance بود. در system scalable می‌توان capacity پردازش را زیاد کرد تا reliability زیر load بالا حفظ شود.
+&rlm;scalability یعنی strategyهایی برای خوب نگه‌داشتن performance هنگام افزایش load داشته باشیم. برای بحث دربارهٔ scalability، ابتدا باید load و performance را کمی‌سازی کنیم. Twitter نمونه‌ای برای توصیف load و response-time percentile نمونه‌ای برای سنجش performance بود. در system scalable می‌توان capacity پردازش را زیاد کرد تا reliability زیر load بالا حفظ شود.
 
-maintainability جنبه‌های زیادی دارد، اما در اصل یعنی زندگی تیم‌های engineering و operations با system بهتر شود. abstraction خوب complexity را کم می‌کند و تغییر و سازگاری با use case جدید را آسان‌تر می‌سازد. operability خوب یعنی visibility مناسب از سلامت system و روش مؤثر برای مدیریت آن داشته باشیم.
+&rlm;maintainability جنبه‌های زیادی دارد، اما در اصل یعنی زندگی تیم‌های engineering و operations با system بهتر شود. abstraction خوب complexity را کم می‌کند و تغییر و سازگاری با use case جدید را آسان‌تر می‌سازد. operability خوب یعنی visibility مناسب از سلامت system و روش مؤثر برای مدیریت آن داشته باشیم.
 
 برای reliable، scalable یا maintainableکردن application راه‌حل آسانی وجود ندارد. بااین‌حال، patternها و techniqueهای مشخصی در applicationهای مختلف تکرار می‌شوند. در فصل‌های بعد نمونه‌هایی از data systemها را بررسی می‌کنیم و می‌بینیم چطور به این هدف‌ها نزدیک می‌شوند.
 

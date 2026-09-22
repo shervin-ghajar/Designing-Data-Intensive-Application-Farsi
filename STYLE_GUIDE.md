@@ -29,17 +29,17 @@
 
 این واژه‌ها در متن و عنوان‌ها به همان شکل انگلیسی می‌آیند؛ برای خوانایی می‌توان آن‌ها را با code span یا bold مشخص کرد و سپس با فارسی ساده توضیح داد:
 
-`idempotency`, `idempotent`, `document`, `relational`, `database`, `cache`, `API`, `REST`, `RPC`, `schema`, `outbox`, `inbox`, `saga`, `retry`, `timeout`, `backoff`, `jitter`, `CDC`, `event sourcing`, `Kafka`, `SQL`, `NoSQL`, `WAL`, `B-tree`, `LSM-tree`, `MapReduce`, `OLTP`, `OLAP`, `atomicity`, `quorum`, `leader`, `follower`, `partition`, `partitioning`, `sharding`, `rebalancing`, `replication`, `normalization`, `denormalization`, `consistency`, `consensus`, `linearizability`, `compatibility`, `reliability`, `scalability`, `maintainability`, `operability`, `simplicity`, `evolvability`.
+&rlm;`idempotency`, `idempotent`, `document`, `relational`, `database`, `cache`, `API`, `REST`, `RPC`, `schema`, `outbox`, `inbox`, `saga`, `retry`, `timeout`, `backoff`, `jitter`, `CDC`, `event sourcing`, `Kafka`, `SQL`, `NoSQL`, `WAL`, `B-tree`, `LSM-tree`, `MapReduce`, `OLTP`, `OLAP`, `atomicity`, `quorum`, `leader`, `follower`, `partition`, `partitioning`, `sharding`, `rebalancing`, `replication`, `normalization`, `denormalization`, `consistency`, `consensus`, `linearizability`, `compatibility`, `reliability`, `scalability`, `maintainability`, `operability`, `simplicity`, `evolvability`.
 
 در صورت نیاز می‌توان کنار واژه توضیح فارسی آورد؛ برای نمونه: `idempotency` یعنی «تکرار امن یک درخواست بدون چندبرابرشدن اثر نهایی». خود واژه به «هم‌توان» یا معادل‌های مبهم ترجمه نمی‌شود.
 
 ### سه اصطلاحی که نباید با هم قاطی شوند
 
-- `normalization`: کم‌کردن duplication و نگه‌داشتن حقیقت data در یک محل.
-- `denormalization`: duplication کنترل‌شده برای سریع‌ترکردن read.
-- `rebalancing`: جابه‌جایی مالکیت `partition`ها بعد از اضافه/حذف node یا تغییر load.
+- &rlm;`normalization`: کم‌کردن duplication و نگه‌داشتن حقیقت data در یک محل.
+- &rlm;`denormalization`: duplication کنترل‌شده برای سریع‌ترکردن read.
+- &rlm;`rebalancing`: جابه‌جایی مالکیت `partition`ها بعد از اضافه/حذف node یا تغییر load.
 
-`rebalancing` هیچ ارتباطی با `normalization` یا `denormalization` ندارد. در متن فارسی فقط توضیح می‌دهیم؛ خود سه واژه را ترجمه نمی‌کنیم.
+&rlm;`rebalancing` هیچ ارتباطی با `normalization` یا `denormalization` ندارد. در متن فارسی فقط توضیح می‌دهیم؛ خود سه واژه را ترجمه نمی‌کنیم.
 
 ## الگوی تعریف مستقل
 

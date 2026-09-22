@@ -1,6 +1,6 @@
 # طراحی سامانه‌های داده‌محور
 
-## Designing Data-Intensive Applications
+## &rlm;<span dir="ltr">Designing Data-Intensive Applications</span>
 
 این مخزن ترجمهٔ فارسی کتاب **Designing Data-Intensive Applications** نوشتهٔ **Martin Kleppmann** است. کتاب دربارهٔ طراحی سامانه‌های داده‌محورِ reliable، scalable و maintainable است و موضوعاتی مانند data model، storage، replication، distributed systems، transaction، batch processing و stream processing را بررسی می‌کند.
 
@@ -12,6 +12,12 @@
 
 <ul dir="rtl" align="right">
   <li><a href="./preface/README.md">پیشگفتار</a></li>
+</ul>
+
+<h3 dir="rtl" align="right">راهنمای یادگیری سریع</h3>
+
+<ul dir="rtl" align="right">
+  <li><a href="./SUMMARIES.md">خلاصهٔ فشردهٔ ۱۲ فصل</a></li>
 </ul>
 
 <h3 dir="rtl" align="right">بخش اول: <span dir="ltr">Foundations of Data Systems</span></h3>
@@ -56,7 +62,7 @@
 
 در هر فصل، اصطلاح انگلیسی در اولین کاربرد آمده است. نام technologyها، APIها، protocolها و codeها ترجمه نشده‌اند تا تطبیق آن‌ها با مستندات فنی آسان بماند.
 
-figureهای فصل‌ها از PDF استخراج شده‌اند و متن توضیحی آن‌ها به فارسی برگردانده شده است.
+&rlm;figureهای فصل‌ها از PDF استخراج شده‌اند و متن توضیحی آن‌ها به فارسی برگردانده شده است.
 
 ## مشارکت
 

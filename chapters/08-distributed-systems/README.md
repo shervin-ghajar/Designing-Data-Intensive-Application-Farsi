@@ -1,10 +1,10 @@
 # فصل ۸: دردسرهای `Distributed Systems`
 
-## The Trouble with Distributed Systems
+## &rlm;<span dir="ltr">The Trouble with Distributed Systems</span>
 
-> تازه با هم آشنا شده‌ایم؛
-> شبکه کند است؛
-> این هم دادهٔ من—اگر توانستی ذخیره‌اش کن.
+<blockquote dir="rtl" align="right">
+  <p dir="rtl" align="right">تازه با هم آشنا شده‌ایم؛<br>شبکه کند است؛<br>این هم دادهٔ من—اگر توانستی ذخیره‌اش کن.</p>
+</blockquote>
 
 در فصل‌های قبل بارها دیدیم که سیستم‌ها هنگام بروز مشکل چه رفتاری دارند: `failover` برای ازکارافتادن replica، `replication lag` و سطح‌های ضعیف `isolation` در `transaction`. با شناختن حالت‌های مرزی، می‌توانیم نرم‌افزار را طوری طراحی کنیم که در آن وضعیت‌ها نیز رفتار قابل‌قبولی داشته باشد. بااین‌حال، تا اینجا هنوز کمی بیش‌ازحد خوش‌بین بوده‌ایم. در این فصل بدترین فرض عملی را در نظر می‌گیریم: هر چیزی که بتواند خراب شود، ممکن است خراب شود.
 
@@ -24,13 +24,13 @@
 
 همین امکانِ خرابی جزئی دلیل اصلی دشواری سیستم‌های توزیع‌شده است. در یک برنامهٔ تک‌ماشینی، یک `function` معمولاً یا برمی‌گردد یا process می‌میرد. در network، نه‌تنها نتیجه نامعلوم است، بلکه مدت رسیدن پیام نیز نامعلوم است.
 
-## `Cloud Computing` و `Supercomputing`
+## &rlm;`Cloud Computing` و `Supercomputing`
 
 برای ساخت سیستم‌های بزرگ، از نظر شیوهٔ برخورد با خرابی، دو سر یک طیف را می‌توان دید:
 
 - در `high-performance computing (HPC)`، ابررایانه‌ای با هزاران CPU برای کارهایی مثل پیش‌بینی آب‌وهوا یا شبیه‌سازی حرکت اتم‌ها استفاده می‌شود. کار معمولاً هر چند وقت یک‌بار `checkpoint` می‌گیرد. اگر یک node خراب شود، کل کار متوقف می‌شود؛ پس از تعمیر node، محاسبه از آخرین checkpoint از سر گرفته می‌شود.
-- `cloud computing` تعریف واحد و دقیقی ندارد، اما معمولاً با datacenter چندمستاجری، computerهای معمولی، network مبتنی بر IP و Ethernet، تخصیص `elastic` و عندالطلب منابع و billing بر اساس مصرف شناخته می‌شود.
-- datacenterهای سازمانی سنتی جایی میان این دو قرار می‌گیرند.
+- &rlm;`cloud computing` تعریف واحد و دقیقی ندارد، اما معمولاً با datacenter چندمستاجری، computerهای معمولی، network مبتنی بر IP و Ethernet، تخصیص `elastic` و عندالطلب منابع و billing بر اساس مصرف شناخته می‌شود.
+- &rlm;datacenterهای سازمانی سنتی جایی میان این دو قرار می‌گیرند.
 
 برای سرویس‌های اینترنتی، متوقف‌کردن کل cluster هنگام خرابی قابل قبول نیست. این سرویس‌ها آنلاین‌اند و باید با latency کم پاسخ دهند. nodeهای cloud معمولاً از commodity hardware ساخته شده‌اند و به‌صورت تکی از تجهیزات تخصصی ابررایانه کم‌اعتمادترند، اما تعداد زیاد و redundancy آن‌ها هزینه را پایین می‌آورد.
 
@@ -44,23 +44,23 @@
 
 این ایده که لایه‌ای بالاتر می‌تواند از لایهٔ پایین قابل‌اعتمادتر باشد، قدیمی است:
 
-- `error-correcting code` می‌تواند چند bit اشتباه را در یک کانال ارتباطی تشخیص دهد و اصلاح کند؛ مثلاً interference رادیویی یک network بی‌سیم را تحمل کند.
-- `IP` ممکن است packet را حذف، دیر، تکراری یا جابه‌جا تحویل دهد. `TCP` روی IP لایه‌ای قابل‌اعتمادتر می‌سازد: packet گم‌شده را دوباره می‌فرستد، duplicate را حذف می‌کند و packetها را به ترتیب مناسب کنار هم می‌گذارد.
+- &rlm;`error-correcting code` می‌تواند چند bit اشتباه را در یک کانال ارتباطی تشخیص دهد و اصلاح کند؛ مثلاً interference رادیویی یک network بی‌سیم را تحمل کند.
+- &rlm;`IP` ممکن است packet را حذف، دیر، تکراری یا جابه‌جا تحویل دهد. `TCP` روی IP لایه‌ای قابل‌اعتمادتر می‌سازد: packet گم‌شده را دوباره می‌فرستد، duplicate را حذف می‌کند و packetها را به ترتیب مناسب کنار هم می‌گذارد.
 
 این لایهٔ بالاتر کامل نیست. error-correcting code نمی‌تواند وقتی کل signal زیر interference مدفون شده، معجزه کند. TCP نیز delay را حذف نمی‌کند؛ فقط بخشی از packet loss و reorder را از برنامه پنهان می‌کند. بااین‌حال، همین پنهان‌کردن خطاهای سطح پایین، reasoning دربارهٔ خطاهای باقی‌مانده را ساده‌تر می‌کند. در یک سیستم واقعی، باید محدودیت هر لایه را هم در نظر گرفت و به abstraction آن بیش‌ازحد اعتماد نکرد.
 
-## `Unreliable Networks`
+## &rlm;<span dir="ltr">`Unreliable Networks`</span>
 
 سیستم‌های مورد بحث این کتاب عمدتاً `shared-nothing` هستند: چند machine که هرکدام memory و disk خودشان را دارند و برای دسترسی به دادهٔ machine دیگر فقط از network درخواست می‌فرستند. این معماری به hardware ویژه نیاز ندارد، با cloud سازگار است و می‌تواند با redundancy در چند datacenter قابل‌اعتماد شود؛ اما network تنها مسیر ارتباطی میان nodeهاست.
 
-Internet و بیشتر networkهای داخلی datacenter، networkهای packet-based و asynchronous هستند. یک node می‌تواند packetی بفرستد، اما network تضمین نمی‌کند packet چه زمانی برسد یا اصلاً برسد. اگر client درخواستی بفرستد و پاسخی نگیرد، دست‌کم این حالت‌ها ممکن است رخ داده باشند:
+&rlm;Internet و بیشتر networkهای داخلی datacenter، networkهای packet-based و asynchronous هستند. یک node می‌تواند packetی بفرستد، اما network تضمین نمی‌کند packet چه زمانی برسد یا اصلاً برسد. اگر client درخواستی بفرستد و پاسخی نگیرد، دست‌کم این حالت‌ها ممکن است رخ داده باشند:
 
 1. خود request گم شده است؛ مثلاً cable قطع شده است.
-2. request در یک queue مانده و بعداً تحویل می‌شود؛ شاید network یا مقصد overloaded باشد.
-3. node مقصد crash کرده یا خاموش شده است.
-4. node موقتاً پاسخ نمی‌دهد؛ مثلاً درگیر یک `stop-the-world GC pause` است و بعداً برمی‌گردد.
-5. node request را اجرا کرده، اما response در network گم شده است.
-6. node request را اجرا کرده، اما response دیر تحویل می‌شود.
+2. &rlm;request در یک queue مانده و بعداً تحویل می‌شود؛ شاید network یا مقصد overloaded باشد.
+3. &rlm;node مقصد crash کرده یا خاموش شده است.
+4. &rlm;node موقتاً پاسخ نمی‌دهد؛ مثلاً درگیر یک `stop-the-world GC pause` است و بعداً برمی‌گردد.
+5. &rlm;node request را اجرا کرده، اما response در network گم شده است.
+6. &rlm;node request را اجرا کرده، اما response دیر تحویل می‌شود.
 
 ![Figure 8-1: وقتی response نمی‌رسد، علت دقیق را نمی‌توان فهمید](../../assets/figures/ch08/figure-8-1.png)
 
@@ -78,21 +78,21 @@ Internet و بیشتر networkهای داخلی datacenter، networkهای packe
 
 سیستم‌ها معمولاً باید node خراب را خودکار تشخیص دهند:
 
-- `load balancer` نباید به node مرده request بفرستد.
+- &rlm;`load balancer` نباید به node مرده request بفرستد.
 - در database دارای `single leader`، در صورت خرابی leader، follower مناسب باید جایگزین شود.
 
 اما network uncertainty باعث می‌شود «کار نمی‌کند» و «پاسخ نداده» یکی نباشند. در بعضی شرایط بازخورد صریح داریم:
 
 - اگر machine مقصد قابل دسترسی باشد ولی process روی port موردنظر گوش ندهد، operating system ممکن است با `RST` یا `FIN` اتصال TCP را رد کند. بااین‌حال، اگر process در وسط پردازش crash کرده باشد، نمی‌دانیم چه مقدار از request را انجام داده است.
-- process می‌تواند پیش از timeout با script یا سیستم مدیریت node، crash خود را به بقیه اعلام کند تا failover سریع‌تر شود؛ HBase نمونه‌ای از این ایده است.
+- &rlm;process می‌تواند پیش از timeout با script یا سیستم مدیریت node، crash خود را به بقیه اعلام کند تا failover سریع‌تر شود؛ HBase نمونه‌ای از این ایده است.
 - در datacenterی که interface مدیریت switch در دسترس است، می‌توان خرابی link یا خاموش‌شدن machine را از خود switch پرسید.
-- router ممکن است `ICMP Destination Unreachable` برگرداند، اما router نیز محدودیت‌های همان network را دارد و از حقیقت کامل خبر ندارد.
+- &rlm;router ممکن است `ICMP Destination Unreachable` برگرداند، اما router نیز محدودیت‌های همان network را دارد و از حقیقت کامل خبر ندارد.
 
 بهترین پاسخ برای موفقیت یک operation، acknowledgement از application است. اگر response نیامد، client معمولاً چند بار retry می‌کند، timeout را منتظر می‌ماند و در نهایت node را مشکوک یا مرده فرض می‌کند. هیچ‌کدام از این مراحل به‌تنهایی اثبات ریاضی خرابی نیست.
 
-## `Timeout` و delay نامحدود
+## &rlm;`Timeout` و delay نامحدود
 
-timeout طولانی، fault را دیر تشخیص می‌دهد و کاربر را معطل می‌کند. timeout کوتاه، fault را سریع‌تر می‌بیند اما احتمال `false positive` را بالا می‌برد: node ممکن است سالم باشد و فقط موقتاً کند شده باشد. اگر node زنده‌ای را زود مرده اعلام کنیم، مسئولیتش به nodeهای دیگر منتقل می‌شود و بار اضافی ایجاد می‌کند. در بار زیاد، همین انتقال می‌تواند `cascading failure` بسازد؛ تا جایی که nodeها یکدیگر را مرده اعلام کنند و همه‌چیز متوقف شود.
+&rlm;timeout طولانی، fault را دیر تشخیص می‌دهد و کاربر را معطل می‌کند. timeout کوتاه، fault را سریع‌تر می‌بیند اما احتمال `false positive` را بالا می‌برد: node ممکن است سالم باشد و فقط موقتاً کند شده باشد. اگر node زنده‌ای را زود مرده اعلام کنیم، مسئولیتش به nodeهای دیگر منتقل می‌شود و بار اضافی ایجاد می‌کند. در بار زیاد، همین انتقال می‌تواند `cascading failure` بسازد؛ تا جایی که nodeها یکدیگر را مرده اعلام کنند و همه‌چیز متوقف شود.
 
 اگر network تضمین می‌کرد هر packet حداکثر در مدت `d` می‌رسد و node سالم request را حداکثر در مدت `r` پردازش می‌کند، timeout حدود `2d + r` معنا داشت: یک d برای request، r برای پردازش و d برای response. اما networkهای asynchronous چنین سقفی ندارند و بیشتر serverها نیز برای هر request بدترین زمان ثابت تضمین نمی‌کنند. بنابراین «اکثر مواقع سریع‌بودن» برای انتخاب timeout کافی نیست؛ یک جهش موقت در round-trip time می‌تواند سامانه را به‌هم بزند.
 
@@ -104,17 +104,17 @@ timeout طولانی، fault را دیر تشخیص می‌دهد و کاربر 
 - اگر queue پر شود، packet drop می‌شود و باید دوباره ارسال شود، حتی اگر hardware کاملاً سالم باشد.
 - اگر CPUهای مقصد مشغول باشند، operating system request ورودی را تا آماده‌شدن application در queue نگه می‌دارد.
 - در محیط virtualized، VM ممکن است ده‌ها millisecond متوقف شود تا VM دیگری از CPU استفاده کند؛ در این فاصله packetها در buffer منتظر می‌مانند.
-- `TCP flow control` یا `backpressure` نرخ ارسال را کم می‌کند تا sender، link یا receiver را overload نکند؛ در نتیجه حتی پیش از ورود packet به network نیز queue ساخته می‌شود.
+- &rlm;`TCP flow control` یا `backpressure` نرخ ارسال را کم می‌کند تا sender، link یا receiver را overload نکند؛ در نتیجه حتی پیش از ورود packet به network نیز queue ساخته می‌شود.
 
 ![Figure 8-2: پرشدن queue در switch وقتی چند ورودی به یک مقصد می‌فرستند](../../assets/figures/ch08/figure-8-2.png)
 
-TCP اگر acknowledgement یک packet را در مهلت محاسبه‌شده نگیرد، آن را گم‌شده فرض و دوباره ارسال می‌کند. application packet loss را نمی‌بیند، اما delay ناشی از انتظار timeout و retransmission را می‌بیند.
+&rlm;TCP اگر acknowledgement یک packet را در مهلت محاسبه‌شده نگیرد، آن را گم‌شده فرض و دوباره ارسال می‌کند. application packet loss را نمی‌بیند، اما delay ناشی از انتظار timeout و retransmission را می‌بیند.
 
-### `TCP` در برابر `UDP`
+### &rlm;`TCP` در برابر `UDP`
 
 برخی applicationهای latency-sensitive مانند video conference و `VoIP` از UDP استفاده می‌کنند. UDP flow control ندارد و packet گم‌شده را retransmit نمی‌کند؛ بنابراین بعضی delayهای متغیر TCP را ندارد، اما همچنان از queue switch و زمان‌بندی CPU اثر می‌گیرد.
 
-UDP وقتی مناسب است که دادهٔ دیررس دیگر ارزشی نداشته باشد. در تماس صوتی، اگر packet صدا گم شود، retransmit آن بعد از زمان پخش فایده ندارد؛ برنامه یک فاصلهٔ کوتاه سکوت می‌گذارد و ادامه می‌دهد. در اینجا retry در سطح انسان اتفاق می‌افتد: «صدای شما برای لحظه‌ای قطع شد، لطفاً تکرار کنید.»
+&rlm;UDP وقتی مناسب است که دادهٔ دیررس دیگر ارزشی نداشته باشد. در تماس صوتی، اگر packet صدا گم شود، retransmit آن بعد از زمان پخش فایده ندارد؛ برنامه یک فاصلهٔ کوتاه سکوت می‌گذارد و ادامه می‌دهد. در اینجا retry در سطح انسان اتفاق می‌افتد: «صدای شما برای لحظه‌ای قطع شد، لطفاً تکرار کنید.»
 
 در cloud عمومی و datacenter چندمستاجری، link، switch، CPU و interface میان مشتریان مشترک‌اند. workloadهای batch مانند `MapReduce` می‌توانند link را پر کنند و `noisy neighbor` باعث delay غیرقابل‌پیش‌بینی شود. چون کنترل مصرف مشتریان دیگر را نداریم، timeout باید با اندازه‌گیری طولانی‌مدت round-trip time و توجه به percentileهای واقعی انتخاب شود.
 
@@ -124,17 +124,17 @@ UDP وقتی مناسب است که دادهٔ دیررس دیگر ارزشی ن
 
 در network تلفن ثابت، هنگام برقراری تماس یک `circuit` و bandwidth ثابت برای مسیر رزرو می‌شود. چون برای هر hop سهم مشخصی از bandwidth از پیش کنار گذاشته شده است، queueing رخ نمی‌دهد و delay سقف معینی دارد. به این مدل `synchronous network` می‌گوییم.
 
-TCP connection چنین circuitی نیست: packetهای آن هر مقدار bandwidth آزاد را که در آن لحظه وجود دارد، به‌صورت opportunistic مصرف می‌کنند. اگر Ethernet و IP هم circuit-switched بودند، می‌شد round-trip time را از پیش تضمین کرد؛ اما packet switching برای trafficهای bursty مناسب‌تر است. درخواست صفحهٔ وب، ارسال email یا انتقال file نرخ ثابتی در تمام مدت نمی‌خواهد؛ کاربر فقط می‌خواهد عملیات هرچه زودتر تمام شود.
+&rlm;TCP connection چنین circuitی نیست: packetهای آن هر مقدار bandwidth آزاد را که در آن لحظه وجود دارد، به‌صورت opportunistic مصرف می‌کنند. اگر Ethernet و IP هم circuit-switched بودند، می‌شد round-trip time را از پیش تضمین کرد؛ اما packet switching برای trafficهای bursty مناسب‌تر است. درخواست صفحهٔ وب، ارسال email یا انتقال file نرخ ثابتی در تمام مدت نمی‌خواهد؛ کاربر فقط می‌خواهد عملیات هرچه زودتر تمام شود.
 
 رزرو circuit برای یک file transfer یا bandwidth را هدر می‌دهد یا آن را unnecessarily کند می‌کند: اگر مقدار رزروشده کم باشد انتقال طولانی می‌شود و اگر زیاد باشد ممکن است اصلاً circuit برقرار نشود. TCP با نرخ متغیر از ظرفیت موجود بهتر استفاده می‌کند. فناوری‌هایی مانند `ATM` و `InfiniBand`، `QoS` و admission control می‌کوشند بخشی از predictability circuit را روی packet network شبیه‌سازی کنند، اما به‌کارگیری آن‌ها در cloud عمومی و Internet تضمین عمومی برای application ایجاد نمی‌کند.
 
-### latency و استفاده از resource
+### &rlm;latency و استفاده از resource
 
-delay متغیر پیامد `dynamic resource partitioning` است. در یک network تلفنی، ظرفیت link به تعداد مشخصی circuit تقسیم می‌شود؛ حتی اگر تنها یک تماس فعال باشد، سهم هر تماس ثابت است. در Internet، senderها برای استفاده از link با هم رقابت می‌کنند و switch در هر لحظه تصمیم می‌گیرد کدام packet عبور کند. این کار queueing و delay متغیر دارد، اما utilization را بالا می‌برد و هزینهٔ هر byte را کم می‌کند.
+&rlm;delay متغیر پیامد `dynamic resource partitioning` است. در یک network تلفنی، ظرفیت link به تعداد مشخصی circuit تقسیم می‌شود؛ حتی اگر تنها یک تماس فعال باشد، سهم هر تماس ثابت است. در Internet، senderها برای استفاده از link با هم رقابت می‌کنند و switch در هر لحظه تصمیم می‌گیرد کدام packet عبور کند. این کار queueing و delay متغیر دارد، اما utilization را بالا می‌برد و هزینهٔ هر byte را کم می‌کند.
 
 همین trade-off در CPU هم وجود دارد. تقسیم پویا میان threadها باعث می‌شود thread گاهی در run queue منتظر بماند، اما hardware بهتر استفاده می‌شود. latency کاملاً قابل‌تضمین به resource اختصاصی، زمان‌بندی محدود و hardware جدا نیاز دارد و utilization را کاهش می‌دهد؛ multi-tenancy ارزان‌تر است، اما delay آن متغیر است. پس delay نامحدود قانون طبیعت نیست، بلکه نتیجهٔ انتخاب میان هزینه، utilization و predictability است.
 
-## `Unreliable Clocks`
+## &rlm;<span dir="ltr">`Unreliable Clocks`</span>
 
 برنامه‌ها از clock برای سؤال‌های متفاوت استفاده می‌کنند:
 
@@ -143,38 +143,38 @@ delay متغیر پیامد `dynamic resource partitioning` است. در یک ne
 3. سرویس در پنج دقیقهٔ گذشته به‌طور متوسط چند query در ثانیه پردازش کرده است؟
 4. کاربر چه مدت در سایت بوده است؟
 5. مقاله چه زمانی منتشر شده است؟
-6. email یادآوری در چه تاریخ و ساعتی ارسال شود؟
-7. cache entry چه زمانی منقضی شود؟
-8. timestamp خطا در log چیست؟
+6. &rlm;email یادآوری در چه تاریخ و ساعتی ارسال شود؟
+7. &rlm;cache entry چه زمانی منقضی شود؟
+8. &rlm;timestamp خطا در log چیست؟
 
 چهار مورد اول مدت‌زمان را می‌سنجند؛ چهار مورد بعدی به یک نقطه در زمان مربوط‌اند. در `distributed system`، پیام برای عبور از network زمان می‌برد و delay آن متغیر است. علاوه بر آن، هر machine clock سخت‌افزاری خودش را دارد—معمولاً oscillator کوارتز—که ممکن است کمی جلوتر یا عقب‌تر از clock machineهای دیگر باشد.
 
-### `Time-of-day clock` و `Monotonic clock`
+### &rlm;`Time-of-day clock` و `Monotonic clock`
 
-computerهای امروزی دست‌کم دو نوع clock دارند و کاربرد آن‌ها را نباید قاطی کرد.
+&rlm;computerهای امروزی دست‌کم دو نوع clock دارند و کاربرد آن‌ها را نباید قاطی کرد.
 
-`Time-of-day clock` همان ساعت تقویمی یا `wall-clock` است. مثلاً `clock_gettime(CLOCK_REALTIME)` در Linux و `System.currentTimeMillis()` در Java تعداد ثانیه یا millisecond از epoch را برمی‌گردانند. این clock با `NTP` با serverهای بیرونی هماهنگ می‌شود تا timestamp دو machine معنای نزدیک‌تری داشته باشد. اما اگر clock محلی جلو باشد، NTP ممکن است آن را reset کند و زمان ظاهراً به عقب برگردد؛ بنابراین برای اندازه‌گیری elapsed time مناسب نیست. resolution قدیمی آن نیز ممکن بود چند millisecond باشد.
+&rlm;`Time-of-day clock` همان ساعت تقویمی یا `wall-clock` است. مثلاً `clock_gettime(CLOCK_REALTIME)` در Linux و `System.currentTimeMillis()` در Java تعداد ثانیه یا millisecond از epoch را برمی‌گردانند. این clock با `NTP` با serverهای بیرونی هماهنگ می‌شود تا timestamp دو machine معنای نزدیک‌تری داشته باشد. اما اگر clock محلی جلو باشد، NTP ممکن است آن را reset کند و زمان ظاهراً به عقب برگردد؛ بنابراین برای اندازه‌گیری elapsed time مناسب نیست. resolution قدیمی آن نیز ممکن بود چند millisecond باشد.
 
-`Monotonic clock` برای اندازه‌گیری duration، timeout و response time ساخته شده است؛ مانند `clock_gettime(CLOCK_MONOTONIC)` در Linux و `System.nanoTime()` در Java. این clock باید رو به جلو حرکت کند. مقدار مطلقش معنای تقویمی ندارد و فقط اختلاف دو خواندن آن مهم است:
+&rlm;`Monotonic clock` برای اندازه‌گیری duration، timeout و response time ساخته شده است؛ مانند `clock_gettime(CLOCK_MONOTONIC)` در Linux و `System.nanoTime()` در Java. این clock باید رو به جلو حرکت کند. مقدار مطلقش معنای تقویمی ندارد و فقط اختلاف دو خواندن آن مهم است:
 
-~~~text
-start = monotonic_clock()
-do_work()
-elapsed = monotonic_clock() - start
+&rlm;~~~text
+&rlm;start = monotonic_clock()
+&rlm;do_work()
+&rlm;elapsed = monotonic_clock() - start
 ~~~
 
 مقایسهٔ مقدار monotonic clock دو machine بی‌معناست، چون مبدأ آن‌ها یکی نیست. در serverهای چند-socket نیز ممکن است timerهای جداگانه‌ای وجود داشته باشد و operating system باید اختلاف آن‌ها را پنهان کند. NTP می‌تواند سرعت جلو رفتن clock را کمی تغییر دهد (`slewing`)، اما نباید آن را ناگهان به عقب یا جلو بپراند. برای duration و timeout، monotonic clock انتخاب امن‌تری است.
 
 ### هماهنگ‌سازی و دقت clock
 
-`NTP` می‌تواند clock را با serverهای بیرونی هماهنگ کند، اما دقت آن مطلق نیست:
+&rlm;`NTP` می‌تواند clock را با serverهای بیرونی هماهنگ کند، اما دقت آن مطلق نیست:
 
-- oscillator کوارتز drift دارد و سرعت آن با دما تغییر می‌کند. فرض ۲۰۰ `ppm` برای serverهای Google یعنی حدود ۶ millisecond drift در ۳۰ ثانیه یا حدود ۱۷ ثانیه در یک روز، حتی اگر همه‌چیز درست کار کند.
+- &rlm;oscillator کوارتز drift دارد و سرعت آن با دما تغییر می‌کند. فرض ۲۰۰ `ppm` برای serverهای Google یعنی حدود ۶ millisecond drift در ۳۰ ثانیه یا حدود ۱۷ ثانیه در یک روز، حتی اگر همه‌چیز درست کار کند.
 - اگر اختلاف clock با NTP server زیاد شود، client ممکن است synchronization را رد کند یا clock را ناگهان reset کند.
-- firewall یا misconfiguration می‌تواند دسترسی node به NTP را قطع کند، بدون اینکه applicationهای دیگر فوراً خراب شوند.
+- &rlm;firewall یا misconfiguration می‌تواند دسترسی node به NTP را قطع کند، بدون اینکه applicationهای دیگر فوراً خراب شوند.
 - دقت synchronization به network delay محدود است. congestion و packet delay متغیر می‌تواند خطا را از ده‌ها millisecond به حدود یک ثانیه برساند.
 - بعضی NTP serverها اشتباه یا misconfigured هستند. queryکردن چند server و حذف outlierها این خطر را کم می‌کند، اما هنوز نباید blind به یک زمان گزارش‌شده اعتماد کرد.
-- `leap second` باعث می‌شود یک دقیقه ۵۹ یا ۶۱ ثانیه داشته باشد. بعضی سیستم‌ها در این وضعیت دچار مشکل شده‌اند. روش `smearing` این است که اصلاح را به‌تدریج در طول زمان پخش کنیم؛ رفتار serverها همیشه یکسان نیست.
+- &rlm;`leap second` باعث می‌شود یک دقیقه ۵۹ یا ۶۱ ثانیه داشته باشد. بعضی سیستم‌ها در این وضعیت دچار مشکل شده‌اند. روش `smearing` این است که اصلاح را به‌تدریج در طول زمان پخش کنیم؛ رفتار serverها همیشه یکسان نیست.
 - در virtual machine، hardware clock مجازی است. وقتی CPU میان VMها جابه‌جا می‌شود، VM ممکن است متوقف شود و از دید application به نظر برسد clock ناگهان جلو پریده است.
 - روی deviceهایی که کنترلشان دست شما نیست، کاربر حتی می‌تواند تاریخ را عمداً تغییر دهد؛ پس clock آن device برای تصمیم‌های امنیتی قابل اعتماد نیست.
 
@@ -182,15 +182,15 @@ elapsed = monotonic_clock() - start
 
 ### تکیه بر clock هماهنگ
 
-clock معمولاً درست کار می‌کند تا روزی که quietly خراب شود. خرابی CPU یا network احتمالاً سریع دیده می‌شود، ولی drift کوارتز یا قطع NTP ممکن است مدت‌ها پنهان بماند و نتیجه‌اش data loss خاموش باشد، نه crash واضح. اگر نرم‌افزار به clock هماهنگ نیاز دارد، باید offset همهٔ machineها را monitor کند و nodeای را که بیش‌ازحد drift کرده از cluster خارج کند.
+&rlm;clock معمولاً درست کار می‌کند تا روزی که quietly خراب شود. خرابی CPU یا network احتمالاً سریع دیده می‌شود، ولی drift کوارتز یا قطع NTP ممکن است مدت‌ها پنهان بماند و نتیجه‌اش data loss خاموش باشد، نه crash واضح. اگر نرم‌افزار به clock هماهنگ نیاز دارد، باید offset همهٔ machineها را monitor کند و nodeای را که بیش‌ازحد drift کرده از cluster خارج کند.
 
-### timestamp برای ترتیب رویدادها
+### &rlm;timestamp برای ترتیب رویدادها
 
 استفاده از timestamp تقویمی برای اینکه بفهمیم «کدام write جدیدتر است» خطرناک است. در مثال زیر:
 
-- client A روی node 1 مقدار `x = 1` را می‌نویسد؛
+- &rlm;client A روی node 1 مقدار `x = 1` را می‌نویسد؛
 - این write به node 3 می‌رسد؛
-- client B روی node 3 مقدار x را increment می‌کند و `x = 2` می‌سازد؛
+- &rlm;client B روی node 3 مقدار x را increment می‌کند و `x = 2` می‌سازد؛
 - هر دو write به node 2 replicate می‌شوند.
 
 ![Figure 8-3: write دوم از نظر causality دیرتر است، اما timestamp زودتری دارد](../../assets/figures/ch08/figure-8-3.png)
@@ -199,8 +199,8 @@ clock معمولاً درست کار می‌کند تا روزی که quietly خ
 
 مشکل‌های LWW فقط به کیفیت NTP محدود نیست:
 
-- node دارای clock کند ممکن است نتواند مقداری را که node دارای clock سریع نوشته overwrite کند تا وقتی clockها به هم برسند؛ داده بی‌سروصدا حذف می‌شود.
-- LWW نمی‌تواند تفاوت میان دو write پشت‌سرهم و دو write واقعاً concurrent را بفهمد.
+- &rlm;node دارای clock کند ممکن است نتواند مقداری را که node دارای clock سریع نوشته overwrite کند تا وقتی clockها به هم برسند؛ داده بی‌سروصدا حذف می‌شود.
+- &rlm;LWW نمی‌تواند تفاوت میان دو write پشت‌سرهم و دو write واقعاً concurrent را بفهمد.
 - دو node ممکن است timestamp یکسان بسازند، مخصوصاً وقتی resolution فقط millisecond است؛ tie-breaker تصادفی نیز می‌تواند causality را نقض کند.
 
 حتی اگر packet در clock فرستنده timestamp `100 ms` داشته باشد و در clock گیرنده در `99 ms` برسد، ظاهراً قبل از ارسال دریافت شده است؛ این از نظر فیزیکی ممکن نیست و نشان می‌دهد timestamp محلی معیار causality نیست. برای ترتیب رویدادها، `logical clock` و روش‌هایی مانند `version vector` مناسب‌ترند. logical clock زمان روز را نمی‌سنجد؛ فقط رابطهٔ «قبل از» و «بعد از» را دنبال می‌کند.
@@ -211,27 +211,27 @@ clock معمولاً درست کار می‌کند تا روزی که quietly خ
 
 عرض این بازه از drift کوارتز، خطای منبع زمان، زمان رفت‌وبرگشت network و مدت گذشته از آخرین synchronization به دست می‌آید. بیشتر APIها این uncertainty را گزارش نمی‌کنند. استثنای مهم `TrueTime` در Spanner است که زمان را به شکل `[earliest, latest]` می‌دهد و می‌گوید زمان واقعی جایی در این بازه است.
 
-### clock هماهنگ برای global snapshot
+### &rlm;clock هماهنگ برای global snapshot
 
-`Snapshot Isolation` برای read-only transactionهای طولانی مثل backup و analytics مفید است. در database یک‌ماشینی، counter افزایشی برای transaction ID کافی است. در database توزیع‌شده، ساختن یک ID سراسریِ افزایشی که causality را هم رعایت کند دشوار است: اگر transaction B دادهٔ نوشته‌شده توسط A را بخواند، ID آن باید از A بزرگ‌تر باشد.
+&rlm;`Snapshot Isolation` برای read-only transactionهای طولانی مثل backup و analytics مفید است. در database یک‌ماشینی، counter افزایشی برای transaction ID کافی است. در database توزیع‌شده، ساختن یک ID سراسریِ افزایشی که causality را هم رعایت کند دشوار است: اگر transaction B دادهٔ نوشته‌شده توسط A را بخواند، ID آن باید از A بزرگ‌تر باشد.
 
-Spanner از confidence intervalهای TrueTime استفاده می‌کند. اگر بازهٔ A کاملاً پیش از بازهٔ B باشد، یعنی `A_latest < B_earliest`، B قطعاً بعد از A رخ داده است. اگر بازه‌ها overlap کنند، ترتیب قطعی نیست. Spanner برای اطمینان از این ترتیب، پیش از commitکردن read-write transaction به‌اندازهٔ uncertainty صبر می‌کند. Google برای کوتاه‌کردن این انتظار در هر datacenter از GPS یا atomic clock استفاده می‌کند. این ایده جالب است، اما نیازمند زیرساخت و coordination سنگین است.
+&rlm;Spanner از confidence intervalهای TrueTime استفاده می‌کند. اگر بازهٔ A کاملاً پیش از بازهٔ B باشد، یعنی `A_latest < B_earliest`، B قطعاً بعد از A رخ داده است. اگر بازه‌ها overlap کنند، ترتیب قطعی نیست. Spanner برای اطمینان از این ترتیب، پیش از commitکردن read-write transaction به‌اندازهٔ uncertainty صبر می‌کند. Google برای کوتاه‌کردن این انتظار در هر datacenter از GPS یا atomic clock استفاده می‌کند. این ایده جالب است، اما نیازمند زیرساخت و coordination سنگین است.
 
-## `Process Pause`
+## &rlm;<span dir="ltr">`Process Pause`</span>
 
 فرض کنید در هر partition یک leader داریم و فقط leader اجازهٔ write دارد. یک راه این است که leader از nodeهای دیگر `lease` بگیرد و پیش از انقضا آن را تمدید کند:
 
-~~~java
-while (true) {
-    request = getIncomingRequest();
+&rlm;~~~java
+&rlm;while (true) {
+&rlm;    request = getIncomingRequest();
 
     // lease باید همیشه دست‌کم ۱۰ ثانیه اعتبار داشته باشد
-    if (lease.expiryTimeMillis - System.currentTimeMillis() < 10000) {
-        lease = lease.renew();
+&rlm;    if (lease.expiryTimeMillis - System.currentTimeMillis() < 10000) {
+&rlm;        lease = lease.renew();
     }
 
-    if (lease.isValid()) {
-        process(request);
+&rlm;    if (lease.isValid()) {
+&rlm;        process(request);
     }
 }
 ~~~
@@ -240,13 +240,13 @@ while (true) {
 
 ممکن است thread درست بعد از بررسی اعتبار lease پانزده ثانیه pause شود. در این فاصله lease منقضی شده و node دیگری leader شده است، اما thread قدیمی پس از بیدارشدن از این موضوع خبر ندارد و request را پردازش می‌کند. متوقف‌شدن طولانی process غیرعادی نیست:
 
-- `JVM` و runtimeهای دیگر ممکن است برای `stop-the-world garbage collection` همهٔ threadها را متوقف کنند؛ حتی GCهای concurrent نیز گاهی pause دارند.
-- VM می‌تواند suspend و بعداً resume شود؛ این اتفاق در live migration یا هنگام کمبود resource رخ می‌دهد.
-- laptop با بستن درِ آن suspend می‌شود.
-- scheduler سیستم‌عامل یا hypervisor ممکن است thread را کنار بگذارد. در VM، CPUای که به VM دیگری داده شده `steal time` نام دارد.
-- synchronous disk I/O، network filesystem یا block device می‌تواند thread را متوقف کند؛ حتی lazy loading یک class ممکن است I/O پنهان داشته باشد.
+- &rlm;`JVM` و runtimeهای دیگر ممکن است برای `stop-the-world garbage collection` همهٔ threadها را متوقف کنند؛ حتی GCهای concurrent نیز گاهی pause دارند.
+- &rlm;VM می‌تواند suspend و بعداً resume شود؛ این اتفاق در live migration یا هنگام کمبود resource رخ می‌دهد.
+- &rlm;laptop با بستن درِ آن suspend می‌شود.
+- &rlm;scheduler سیستم‌عامل یا hypervisor ممکن است thread را کنار بگذارد. در VM، CPUای که به VM دیگری داده شده `steal time` نام دارد.
+- &rlm;synchronous disk I/O، network filesystem یا block device می‌تواند thread را متوقف کند؛ حتی lazy loading یک class ممکن است I/O پنهان داشته باشد.
 - با `paging`، یک memory access ممکن است page fault و disk I/O ایجاد کند. فشار زیاد memory باعث `thrashing` می‌شود.
-- process Unix با `SIGSTOP` متوقف می‌شود و پس از `SIGCONT` دقیقاً از همان نقطه ادامه می‌دهد، بی‌آنکه خودش بداند چه مدت گذشته است.
+- &rlm;process Unix با `SIGSTOP` متوقف می‌شود و پس از `SIGCONT` دقیقاً از همان نقطه ادامه می‌دهد، بی‌آنکه خودش بداند چه مدت گذشته است.
 
 هرکدام از این رخدادها می‌تواند thread را وسط یک function متوقف کند و بعداً ادامه دهد. در این فاصله، جهان بیرون حرکت کرده، nodeهای دیگر شاید آن را dead اعلام کرده‌اند و lease جدید داده‌اند. ابزارهای درون یک machine مانند mutex و shared memory مستقیماً مشکل distributed را حل نمی‌کنند؛ اینجا فقط messageهایی داریم که خودشان ممکن است دیر برسند یا گم شوند.
 
@@ -258,7 +258,7 @@ while (true) {
 
 برای بیشتر data-processing systemهای server-side، چنین هزینه‌ای منطقی نیست. این سیستم‌ها باید pause و clock instability محیط عادی را تحمل کنند. یک راه عملی کاهش اثر GC این است که pause را مانند outage برنامه‌ریزی‌شده ببینیم: پیش از GC، ترافیک جدید را به node نفرستیم، requestهای جاری را تمام کنیم و سپس GC را اجرا کنیم. راه دیگر، استفاده از GC برای objectهای کوتاه‌عمر و restart دوره‌ای process است؛ traffic پیش از restart به nodeهای دیگر منتقل می‌شود، شبیه `rolling upgrade`. این روش pause را حذف نمی‌کند، اما اثر آن را بر کاربر و percentileهای بالای latency کم می‌کند.
 
-## `Knowledge`، `Truth` و `Lies`
+## &rlm;`Knowledge`، `Truth` و `Lies`
 
 تا اینجا دیدیم که distributed system shared memory ندارد، پیام‌ها با delay متغیر از network می‌گذرند، nodeها ممکن است partial failure داشته باشند، clockها خطا کنند و processها pause شوند. بنابراین یک node تقریباً هیچ‌چیز را با قطعیت از وضعیت node دیگر نمی‌داند. اگر node دیگر پاسخ نمی‌دهد، نمی‌دانیم خودش خراب است، network خراب است یا process فقط pause شده است.
 
@@ -268,11 +268,11 @@ while (true) {
 
 فرض کنید nodeای همهٔ پیام‌های ورودی را دریافت می‌کند، اما messageهای خروجی‌اش گم یا delayed می‌شوند. از دید خودش زنده است؛ از دید بقیه، پس از timeout مرده به نظر می‌رسد. یا node ممکن است یک دقیقه در GC pause باشد و بعد بدون اطلاع از اینکه دیگران آن را کنار گذاشته‌اند، سالم برگردد.
 
-node نباید به قضاوت خودش به‌تنهایی اعتماد کند. بسیاری از protocolها از `quorum` استفاده می‌کنند: تصمیم به حداقل تعداد رأی از چند node نیاز دارد. رایج‌ترین quorum، اکثریت مطلق است. با سه node، یک خرابی و با پنج node، دو خرابی را می‌توان تحمل کرد. دو اکثریت متضاد هم‌زمان وجود ندارند؛ بنابراین تصمیم واحد می‌ماند.
+&rlm;node نباید به قضاوت خودش به‌تنهایی اعتماد کند. بسیاری از protocolها از `quorum` استفاده می‌کنند: تصمیم به حداقل تعداد رأی از چند node نیاز دارد. رایج‌ترین quorum، اکثریت مطلق است. با سه node، یک خرابی و با پنج node، دو خرابی را می‌توان تحمل کرد. دو اکثریت متضاد هم‌زمان وجود ندارند؛ بنابراین تصمیم واحد می‌ماند.
 
 اگر quorum nodeها node دیگری را dead اعلام کند، آن node—even اگر خودش سالم احساس شود—باید کنار برود. در فصل ۹ می‌بینیم که همین ایده چگونه در `consensus` به کار می‌رود.
 
-### `Leader` و `Lock`
+### &rlm;`Leader` و `Lock`
 
 سیستم‌ها اغلب می‌خواهند فقط یک صاحب برای چیزی وجود داشته باشد:
 
@@ -286,16 +286,16 @@ node نباید به قضاوت خودش به‌تنهایی اعتماد کند
 
 ![Figure 8-4: lease منقضی شده، اما client قدیمی هنوز به نوشتن ادامه می‌دهد](../../assets/figures/ch08/figure-8-4.png)
 
-### `Fencing Token`
+### &rlm;<span dir="ltr">`Fencing Token`</span>
 
 راه سادهٔ جلوگیری از اثرگذاری owner قدیمی، `fencing` است. lock service هر بار که lock یا lease می‌دهد، یک `fencing token` عددی افزایشی برمی‌گرداند. client باید این token را همراه هر write بفرستد. resource نیز باید token آخرین write را نگه دارد و هر request با token قدیمی‌تر را رد کند.
 
 در مثال:
 
-1. client 1 lease و token `33` می‌گیرد و سپس pause می‌شود.
-2. lease منقضی می‌شود؛ client 2 token `34` می‌گیرد و write خود را انجام می‌دهد.
-3. client 1 برمی‌گردد و write با token `33` می‌فرستد.
-4. storage server می‌بیند token `34` قبلاً پردازش شده و request قدیمی را رد می‌کند.
+1. &rlm;client 1 lease و token `33` می‌گیرد و سپس pause می‌شود.
+2. &rlm;lease منقضی می‌شود؛ client 2 token `34` می‌گیرد و write خود را انجام می‌دهد.
+3. &rlm;client 1 برمی‌گردد و write با token `33` می‌فرستد.
+4. &rlm;storage server می‌بیند token `34` قبلاً پردازش شده و request قدیمی را رد می‌کند.
 
 ![Figure 8-5: فقط write با fencing token بزرگ‌تر پذیرفته می‌شود](../../assets/figures/ch08/figure-8-5.png)
 
@@ -303,7 +303,7 @@ node نباید به قضاوت خودش به‌تنهایی اعتماد کند
 
 بررسی server-side حتی از نظر اعتماد نیز مفید است. سرویس نباید فرض کند همهٔ clientها همیشه درست رفتار می‌کنند؛ clientها ممکن است به‌دلیل bug، misconfiguration یا فشار عملیاتی، request خارج از قرارداد بفرستند.
 
-### `Byzantine Fault`
+### &rlm;<span dir="ltr">`Byzantine Fault`</span>
 
 در این کتاب فرض می‌کنیم nodeها unreliable اما honest هستند: ممکن است کند شوند، پاسخ ندهند یا state قدیمی داشته باشند، اما اگر پاسخ می‌دهند، عمداً protocol را جعل نمی‌کنند. اگر node بتواند token ساختگی بفرستد یا ادعا کند پیامی را دریافت کرده، با `Byzantine fault` روبه‌رو هستیم؛ یعنی node ممکن است هر رفتار دلخواه یا مخربی داشته باشد.
 
@@ -322,43 +322,43 @@ node نباید به قضاوت خودش به‌تنهایی اعتماد کند
 
 حتی در نبود attacker عمدی، افزودن guardهای ساده مفید است:
 
-- packet ممکن است به‌علت hardware، driver یا router خراب شود. checksumهای TCP و UDP معمولاً آن را می‌گیرند، اما application-level checksum لایهٔ دفاعی دیگری می‌سازد.
-- input کاربر باید range معقول، طول محدود و format معتبر داشته باشد تا memory exhaustion، SQL injection یا حملهٔ مشابه رخ ندهد.
-- NTP client باید چند server داشته باشد، error را تخمین بزند و زمانی را که یک outlier گزارش می‌کند کنار بگذارد.
+- &rlm;packet ممکن است به‌علت hardware، driver یا router خراب شود. checksumهای TCP و UDP معمولاً آن را می‌گیرند، اما application-level checksum لایهٔ دفاعی دیگری می‌سازد.
+- &rlm;input کاربر باید range معقول، طول محدود و format معتبر داشته باشد تا memory exhaustion، SQL injection یا حملهٔ مشابه رخ ندهد.
+- &rlm;NTP client باید چند server داشته باشد، error را تخمین بزند و زمانی را که یک outlier گزارش می‌کند کنار بگذارد.
 
 این‌ها Byzantine fault tolerance کامل نیستند؛ فقط خطاهای سخت‌افزاری، software bug و misconfiguration معمولی را زودتر آشکار می‌کنند.
 
-## `System Model` و واقعیت
+## &rlm;`System Model` و واقعیت
 
 الگوریتم distributed برای آنکه مستقل از جزئیات hardware و operating system باشد، به یک abstraction نیاز دارد که بگوید چه خرابی‌هایی ممکن‌اند. این abstraction همان `system model` است.
 
 ### فرض‌های زمانی
 
-#### `Synchronous model`
+#### &rlm;<span dir="ltr">`Synchronous model`</span>
 
 در این مدل، سقف ثابتی برای network delay، process pause و clock error وجود دارد. clockها لزوماً کاملاً برابر نیستند و delay صفر نیست، اما upper bound آن‌ها را می‌دانیم. این مدل برای بیشتر production systemها واقع‌بینانه نیست.
 
-#### `Partially synchronous model`
+#### &rlm;<span dir="ltr">`Partially synchronous model`</span>
 
 سیستم بیشتر مواقع مانند synchronous رفتار می‌کند، اما گاهی delay، pause یا clock drift از bound عبور می‌کند و حتی بسیار بزرگ می‌شود. این مدل برای بسیاری از systemهای واقعی مفیدتر است: اگر همه‌چیز همیشه نامحدود کند باشد، هیچ کاری پیش نمی‌رود؛ اما باید آمادهٔ شکستن فرض‌های زمانی باشیم.
 
-#### `Asynchronous model`
+#### &rlm;<span dir="ltr">`Asynchronous model`</span>
 
 در این مدل هیچ فرض زمانی مجازی نیست: network delay، pause و clock error bound ندارند و الگوریتم حتی نباید به clock یا timeout تکیه کند. الگوریتم‌های این مدل ممکن‌اند، اما محدودیت زیادی دارند.
 
 ### مدل خرابی node
 
-#### `Crash-stop`
+#### &rlm;<span dir="ltr">`Crash-stop`</span>
 
-node فقط یک‌جور خراب می‌شود: ناگهان crash می‌کند و دیگر هرگز برنمی‌گردد.
+&rlm;node فقط یک‌جور خراب می‌شود: ناگهان crash می‌کند و دیگر هرگز برنمی‌گردد.
 
-#### `Crash-recovery`
+#### &rlm;<span dir="ltr">`Crash-recovery`</span>
 
-node ممکن است هر لحظه crash کند و بعد از مدت نامعلوم دوباره پاسخ دهد. فرض معمول این است که `stable storage` روی disk پس از crash باقی می‌ماند، اما state داخل memory از بین می‌رود.
+&rlm;node ممکن است هر لحظه crash کند و بعد از مدت نامعلوم دوباره پاسخ دهد. فرض معمول این است که `stable storage` روی disk پس از crash باقی می‌ماند، اما state داخل memory از بین می‌رود.
 
-#### `Byzantine` یا `arbitrary fault`
+#### &rlm;`Byzantine` یا `arbitrary fault`
 
-node می‌تواند هر کاری بکند، از جمله دروغ‌گفتن، فرستادن پاسخ متناقض و تلاش برای فریب nodeهای دیگر.
+&rlm;node می‌تواند هر کاری بکند، از جمله دروغ‌گفتن، فرستادن پاسخ متناقض و تلاش برای فریب nodeهای دیگر.
 
 برای بیشتر سرویس‌های داده‌ای، ترکیب `partially synchronous` با `crash-recovery` مدل کاربردی‌تری است؛ اما الگوریتم باید صریحاً بگوید تحت چه فرضی guarantee می‌دهد.
 
@@ -366,17 +366,17 @@ node می‌تواند هر کاری بکند، از جمله دروغ‌گفت�
 
 برای تعریف «درست‌بودن»، ویژگی‌هایی را که می‌خواهیم الگوریتم همیشه داشته باشد مشخص می‌کنیم. برای fencing token مثلاً:
 
-- **`Uniqueness`:** دو request توکن یکسان نگیرند.
-- **`Monotonic sequence`:** اگر request `x` پیش از `y` کامل شده، token مربوط به `x` از token مربوط به `y` کوچک‌تر باشد.
-- **`Availability`:** node سالمی که token می‌خواهد، سرانجام پاسخ بگیرد.
+- &rlm;**`Uniqueness`:** دو request توکن یکسان نگیرند.
+- &rlm;**`Monotonic sequence`:** اگر request `x` پیش از `y` کامل شده، token مربوط به `x` از token مربوط به `y` کوچک‌تر باشد.
+- &rlm;**`Availability`:** node سالمی که token می‌خواهد، سرانجام پاسخ بگیرد.
 
 الگوریتم زمانی در یک system model درست است که این propertyها را در همهٔ حالت‌هایی که مدل اجازه می‌دهد رعایت کند. برای دقیق‌تر فکرکردن، propertyها را به دو گروه تقسیم می‌کنیم.
 
-### `Safety` و `Liveness`
+### &rlm;`Safety` و `Liveness`
 
-`Safety` یعنی اتفاق بدی رخ ندهد. اگر safety نقض شود، می‌توان نقطه‌ای مشخص را پیدا کرد که در آن خطا اتفاق افتاده است و آسیب به عقب برنمی‌گردد؛ مثلاً duplicate fencing token تحویل داده شده است.
+&rlm;`Safety` یعنی اتفاق بدی رخ ندهد. اگر safety نقض شود، می‌توان نقطه‌ای مشخص را پیدا کرد که در آن خطا اتفاق افتاده است و آسیب به عقب برنمی‌گردد؛ مثلاً duplicate fencing token تحویل داده شده است.
 
-`Liveness` یعنی اتفاق خوب سرانجام رخ دهد. ممکن است در یک لحظه برقرار نباشد—مثلاً request ارسال شده، ولی response هنوز نرسیده—اما هنوز امید است که بعداً برقرار شود. کلمهٔ «eventually» معمولاً نشانهٔ liveness است؛ `eventual consistency` نیز در همین گروه قرار می‌گیرد.
+&rlm;`Liveness` یعنی اتفاق خوب سرانجام رخ دهد. ممکن است در یک لحظه برقرار نباشد—مثلاً request ارسال شده، ولی response هنوز نرسیده—اما هنوز امید است که بعداً برقرار شود. کلمهٔ «eventually» معمولاً نشانهٔ liveness است؛ `eventual consistency` نیز در همین گروه قرار می‌گیرد.
 
 در distributed algorithm معمولاً safety باید در همهٔ شرایط برقرار بماند، حتی اگر همهٔ nodeها crash کنند یا network کاملاً قطع شود. برای liveness می‌توان شرط گذاشت: مثلاً request فقط وقتی باید سرانجام پاسخ بگیرد که اکثریت nodeها زنده باشند و network پس از مدتی برگردد. مدل partially synchronous نیز می‌گوید اختلال در نهایت finite است و سیستم دوباره وضعیت قابل‌استفاده پیدا می‌کند.
 
@@ -393,14 +393,14 @@ node می‌تواند هر کاری بکند، از جمله دروغ‌گفت�
 در این فصل بدترین حالت‌های عملی سیستم توزیع‌شده را بررسی کردیم:
 
 - هر packet ممکن است گم یا به‌طور دلخواه delayed شود و reply نیز ممکن است گم شود؛ بنابراین نبود response نمی‌گوید request اجرا نشده است.
-- clock یک node ممکن است با بقیه sync نباشد، ناگهان جلو یا عقب برود و uncertainty واقعی‌اش مشخص نباشد.
-- process ممکن است هرجا pause شود، مثلاً به‌علت GC، suspend شدن VM، disk I/O یا `SIGSTOP`؛ nodeهای دیگر آن را dead اعلام کنند و بعد خود process بدون اطلاع از این تصمیم برگردد.
+- &rlm;clock یک node ممکن است با بقیه sync نباشد، ناگهان جلو یا عقب برود و uncertainty واقعی‌اش مشخص نباشد.
+- &rlm;process ممکن است هرجا pause شود، مثلاً به‌علت GC، suspend شدن VM، disk I/O یا `SIGSTOP`؛ nodeهای دیگر آن را dead اعلام کنند و بعد خود process بدون اطلاع از این تصمیم برگردد.
 - این `partial failure` ویژگی تعریف‌کنندهٔ distributed system است. هر کاری که به node دیگری وابسته باشد ممکن است fail، کند یا timeout شود.
-- detection دشوار است؛ timeout بین network fault و node fault تمایز قطعی نمی‌گذارد و حتی nodeی که فقط «limp» شده—مثلاً با throughput بسیار کم—ممکن است از node کاملاً مرده دردسرسازتر باشد.
+- &rlm;detection دشوار است؛ timeout بین network fault و node fault تمایز قطعی نمی‌گذارد و حتی nodeی که فقط «limp» شده—مثلاً با throughput بسیار کم—ممکن است از node کاملاً مرده دردسرسازتر باشد.
 - تصمیم‌های مهم را نباید به یک node واگذار کرد. quorum و رأی اکثریت کمک می‌کنند یک node قدیمی یا جداافتاده نتواند به‌تنهایی leader بماند.
 - اگر nodeها عمداً دروغ بگویند، model به Byzantine تغییر می‌کند و راه‌حل‌های پیچیده‌تری لازم است؛ برای بیشتر serverهای تحت کنترل یک سازمان، فرض crash-recovery و nodeهای honest مناسب‌تر است.
 - شبکهٔ synchronous با resource رزروشده delay محدود می‌دهد، اما utilization و هزینهٔ بدتری دارد. networkهای packet-based و cloud، resource را بهتر استفاده می‌کنند ولی delay متغیر دارند.
-- distributed system را می‌توان با مدل نظری ساده تحلیل کرد، اما production به monitoring، chaos testing، checksum، validation و مسیر recovery برای رخدادهای خارج از مدل نیاز دارد.
+- &rlm;distributed system را می‌توان با مدل نظری ساده تحلیل کرد، اما production به monitoring، chaos testing، checksum، validation و مسیر recovery برای رخدادهای خارج از مدل نیاز دارد.
 
 اگر می‌توان مسئله را با یک machine حل کرد، از پیچیدگی distributed بی‌دلیل استفاده نکنید. بااین‌حال، fault tolerance، latency جغرافیایی و scale گاهی واقعاً به چند node نیاز دارند. فصل بعد از این فهرست مشکلات به سراغ الگوریتم‌هایی می‌رود که تحت فرض‌های مشخص، ضمانت‌های قابل‌اعتماد می‌سازند.
 
@@ -408,78 +408,78 @@ node می‌تواند هر کاری بکند، از جمله دروغ‌گفت�
 
 فرض کنید دو client هم‌زمان می‌خواهند username یکسانی را ثبت کنند. storage باید constraint یکتا و اتمیک داشته باشد؛ اما مسئله فقط رقابت دو client نیست. اگر client اول timeout بگیرد، نمی‌داند:
 
-- request قبل از timeout اجرا شده و response گم شده است؛
-- request هنوز در queue است؛
-- request اصلاً به server نرسیده است.
+- &rlm;request قبل از timeout اجرا شده و response گم شده است؛
+- &rlm;request هنوز در queue است؛
+- &rlm;request اصلاً به server نرسیده است.
 
 راه امن این است که client یک `idempotency key` بفرستد، server نتیجهٔ آن key را نگه دارد و retry همان نتیجهٔ قبلی را برگرداند. برای تشخیص owner قدیمی، lock service باید `fencing token` بدهد و database یا storage باید token را خودش بررسی کند. اگر coordinator unreachable است، سرویس نباید با حدس‌زدن «نام آزاد است» پاسخ دهد؛ بهتر است وضعیت `unknown` را نگه دارد و امکان query دوباره فراهم کند.
 
 ## تعریف جداگانهٔ اصطلاحات
 
-### `partial failure`
+### &rlm;<span dir="ltr">`partial failure`</span>
 
 خرابی بخشی از سیستم، درحالی‌که قسمت‌های دیگر هنوز کار می‌کنند. مثلاً payment provider پاسخ نمی‌دهد ولی order service و database سالم‌اند.
 
-### `network fault`
+### &rlm;<span dir="ltr">`network fault`</span>
 
 هر اختلالی در مسیر ارسال یا دریافت پیام: loss، delay، duplicate، reorder یا قطع link. `network partition` حالتی است که یک بخش network از بخش دیگر جدا می‌شود.
 
-### `timeout`
+### &rlm;<span dir="ltr">`timeout`</span>
 
 مهلتی که پس از آن پاسخ را دیرشده فرض می‌کنیم. timeout موفقیت یا شکست قطعی operation را ثابت نمی‌کند.
 
-### `retry`
+### &rlm;<span dir="ltr">`retry`</span>
 
 تلاش دوباره برای operation پس از خطای موقت. retry باید با deadline، `backoff` و `jitter` محدود شود و operation ترجیحاً `idempotent` باشد.
 
-### `backoff` و `jitter`
+### &rlm;`backoff` و `jitter`
 
-`backoff` فاصلهٔ retryها را افزایش می‌دهد. `jitter` تغییر تصادفی کوچکی به فاصله اضافه می‌کند تا هزار client هم‌زمان یک burst تازه نسازند.
+&rlm;`backoff` فاصلهٔ retryها را افزایش می‌دهد. `jitter` تغییر تصادفی کوچکی به فاصله اضافه می‌کند تا هزار client هم‌زمان یک burst تازه نسازند.
 
-### `monotonic clock`
+### &rlm;<span dir="ltr">`monotonic clock`</span>
 
-clock مناسب اندازه‌گیری duration که نباید با اصلاح ساعت تقویمی به عقب برگردد. برای timeout و elapsed time به کار می‌رود، نه نمایش تاریخ به کاربر.
+&rlm;clock مناسب اندازه‌گیری duration که نباید با اصلاح ساعت تقویمی به عقب برگردد. برای timeout و elapsed time به کار می‌رود، نه نمایش تاریخ به کاربر.
 
-### `time-of-day clock`
+### &rlm;<span dir="ltr">`time-of-day clock`</span>
 
-clock تقویمی برای نمایش تاریخ و ساعت. ممکن است با NTP جلو یا عقب تنظیم شود و برای اندازه‌گیری duration مناسب نیست.
+&rlm;clock تقویمی برای نمایش تاریخ و ساعت. ممکن است با NTP جلو یا عقب تنظیم شود و برای اندازه‌گیری duration مناسب نیست.
 
-### `clock drift` و `clock skew`
+### &rlm;`clock drift` و `clock skew`
 
-`clock drift` سرعت متفاوت clock نسبت به زمان واقعی است. `clock skew` اختلاف reading دو clock در یک زمان تقریباً مشترک است.
+&rlm;`clock drift` سرعت متفاوت clock نسبت به زمان واقعی است. `clock skew` اختلاف reading دو clock در یک زمان تقریباً مشترک است.
 
-### `logical clock`
+### &rlm;<span dir="ltr">`logical clock`</span>
 
-counter یا سازوکاری برای ثبت رابطهٔ ترتیب رویدادها، بدون ادعای اندازه‌گیری ساعت واقعی. برای causality از wall-clock امن‌تر است.
+&rlm;counter یا سازوکاری برای ثبت رابطهٔ ترتیب رویدادها، بدون ادعای اندازه‌گیری ساعت واقعی. برای causality از wall-clock امن‌تر است.
 
-### `confidence interval`
+### &rlm;<span dir="ltr">`confidence interval`</span>
 
 بازه‌ای که clock یا measurement با سطح اطمینان مشخص می‌گوید مقدار واقعی در آن قرار دارد. resolution بالای API به‌تنهایی uncertainty کم ایجاد نمی‌کند.
 
-### `lease`
+### &rlm;<span dir="ltr">`lease`</span>
 
 مجوز موقتی برای مالکیت resource. پس از انقضا، owner قبلی باید دیگر حق استفاده نداشته باشد؛ چون process ممکن است pause شود، lease باید با fencing محافظت شود.
 
-### `fencing token`
+### &rlm;<span dir="ltr">`fencing token`</span>
 
 عدد افزایشی همراه lease که resource با آن requestهای قدیمی را رد می‌کند. بررسی باید در خود resource انجام شود، نه فقط در client.
 
-### `quorum`
+### &rlm;<span dir="ltr">`quorum`</span>
 
 حداقل تعداد رأی لازم برای تصمیم مشترک. اکثریت باعث می‌شود دو تصمیم متضاد هم‌زمان هر دو معتبر نباشند.
 
-### `safety`
+### &rlm;<span dir="ltr">`safety`</span>
 
 ویژگی «چیز بد رخ ندهد». پس از نقض safety، اثر آن معمولاً برگشت‌پذیر نیست.
 
-### `liveness`
+### &rlm;<span dir="ltr">`liveness`</span>
 
 ویژگی «چیز خوب سرانجام رخ دهد». برای آن معمولاً فرض می‌کنیم network یا اکثریت nodeها در نهایت برمی‌گردند.
 
-### `Byzantine fault`
+### &rlm;<span dir="ltr">`Byzantine fault`</span>
 
 خرابی‌ای که در آن node می‌تواند عمدی یا غیرعمدی هر پاسخ دلخواه، متناقض یا فریبکارانه‌ای بفرستد. این با node کند یا crashکردهٔ honest فرق دارد.
 
-### `system model`
+### &rlm;<span dir="ltr">`system model`</span>
 
 بیان رسمی فرض‌های الگوریتم دربارهٔ timing، network و نوع خرابی node. guarantee فقط در محدودهٔ همین model معتبر است.
